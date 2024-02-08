@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="q_index_files/libs/clipboard/clipboard.min.js"></script>
-<script src="q_index_files/libs/quarto-html/tabby.min.js"></script>
-<script src="q_index_files/libs/quarto-html/popper.min.js"></script>
-<script src="q_index_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="q_index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="q_index_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="q_index_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="q_index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/tabby.min.js"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Barry Quinn">
@@ -15,8 +15,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="q_index_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="q_index_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -95,12 +95,12 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="q_index_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="mycssblend.css">
-  <link href="q_index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="q_index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="q_index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="q_index_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="index_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -441,7 +441,7 @@ Barry Quinn
 <span id="cb1-6"><a href="#cb1-6"></a>  <span class="fu">ts</span>(monthly_r2002r<span class="sc">$</span>monthly.returns, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1988</span>,<span class="dv">1</span>))<span class="ot">-&gt;</span>r2000r_m_ts</span>
 <span id="cb1-7"><a href="#cb1-7"></a>  <span class="fu">autoplot</span>(r2000r_m_ts) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Log returns"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Year"</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Figure 2: Monthly log returns of the Russell 2000 Price Index"</span>,<span class="at">subtitle =</span><span class="st">" from March 1988 to December 2019"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="q_index_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
 </div>
 </div>
 </div><div class="column">
@@ -449,7 +449,7 @@ Barry Quinn
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">autoplot</span>(tsfe<span class="sc">::</span>carnival_eps_ts) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Year"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Earnings"</span>) <span class="sc">+</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Figure 3:"</span>,<span class="at">subtitle =</span>  <span class="st">"Quarterly earnings per share for Carnival Plc from the first quarter of 1994 to the fourth quarter of 2019"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="q_index_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -485,7 +485,7 @@ Barry Quinn
 <span id="cb3-2"><a href="#cb3-2"></a>tsfe<span class="sc">::</span>carnival_eps_ts <span class="sc">|&gt;</span> <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="q_index_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
 <section id="inference-and-nonstationarity-1" class="slide level2">
 <h2>Inference and nonstationarity</h2>
 <ul>
@@ -502,7 +502,7 @@ Barry Quinn
 <span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">ylab</span>(<span class="st">"VIX"</span>) <span class="sc">+</span> <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="q_index_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
 <section id="non-stationarity-in-the-mean" class="slide level2">
 <h2>Non-stationarity in the mean</h2>
 <ul>
@@ -519,27 +519,27 @@ Barry Quinn
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">autoplot</span>(ftse_m_ts) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Monthly Price Index"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Year"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="q_index_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
 <section id="acf" class="slide level2">
 <h2>ACF</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">ggAcf</span>(ftse_m_ts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="q_index_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
 <section id="first-differencing" class="slide level2">
 <h2>First differencing</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">autoplot</span>(<span class="fu">diff</span>(ftse_m_ts)) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Change in monthly FTSE Index"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Year"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="q_index_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
 </div>
 </div>
 <h3 id="acf-after-first-differencing">ACF after first differencing</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">ggAcf</span>(<span class="fu">diff</span>(ftse_m_ts))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="q_index_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
 </div>
 </div>
 </section>
@@ -558,14 +558,14 @@ Barry Quinn
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">window</span>(carnival_eps_ts,<span class="at">end=</span><span class="fu">c</span>(<span class="dv">2010</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="q_index_files/figure-revealjs/carnival1-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/carnival1-1.png" width="960" class="r-stretch"></section>
 <section id="use-log-to-stablise-variation" class="slide level2">
 <h2>use <code>log()</code> to stablise variation</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">window</span>(carnival_eps_ts,<span class="at">end=</span><span class="fu">c</span>(<span class="dv">2010</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> <span class="fu">log</span>() <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="q_index_files/figure-revealjs/carnival2-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/carnival2-1.png" width="960" class="r-stretch"></section>
 <section id="seasonally-differencing" class="slide level2">
 <h2>Seasonally differencing?</h2>
 <div class="cell">
@@ -573,14 +573,14 @@ Barry Quinn
 <span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">log</span>() <span class="sc">%&gt;%</span> <span class="fu">diff</span>(<span class="at">lag=</span><span class="dv">4</span>) <span class="sc">%&gt;%</span>  <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="q_index_files/figure-revealjs/carnival3-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/carnival3-1.png" width="960" class="r-stretch"></section>
 <section id="is-this-now-stationary" class="slide level2 your-turn">
 <h2>Is this now stationary</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">window</span>(carnival_eps_ts,<span class="at">end=</span><span class="fu">c</span>(<span class="dv">2010</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> <span class="fu">log</span>() <span class="sc">%&gt;%</span> <span class="fu">diff</span>(<span class="at">lag=</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">diff</span>(<span class="at">lag=</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="q_index_files/figure-revealjs/carnival4-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/carnival4-1.png" width="960" class="r-stretch"></section>
 <section id="section-1" class="slide level2 discussion small">
 <h2></h2>
 <ul>
@@ -696,7 +696,7 @@ critical values 0.347 0.463  0.574 0.739</code></pre>
 </div><div class="column">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="q_index_files/figure-revealjs/arp1-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/arp1-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -715,7 +715,7 @@ critical values 0.347 0.463  0.574 0.739</code></pre>
 </div>
 <p>::: ::: {.column}</p>
 
-<img data-src="q_index_files/figure-revealjs/arp4-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/arp4-1.png" width="960" class="r-stretch"></section>
 <section id="ar1-models-explained" class="slide level2">
 <h2>AR(1) models explained</h2>
 <p><span class="math display">\[y_{t}=c + \phi_1 y_{t -1}+\varepsilon_{t}\]</span> * When <span class="math inline">\(\phi_1=0\)</span>, <span class="math inline">\(y_t\)</span> is <strong>equivalent to White Noise</strong> * When <span class="math inline">\(\phi_1=1\)</span> and <span class="math inline">\(c=0\)</span>, <span class="math inline">\(y_t\)</span> is <strong>equivalent to a Random Walk</strong> * When <span class="math inline">\(\phi_1=1\)</span> and <span class="math inline">\(c\ne0\)</span>, <span class="math inline">\(y_t\)</span> is <strong>equivalent to a Random Walk with drift</strong> * When <span class="math inline">\(\phi_1&lt;0\)</span>, <span class="math inline">\(y_t\)</span> tends to <strong>oscillate between positive and negative values</strong>.</p>
@@ -738,7 +738,7 @@ critical values 0.347 0.463  0.574 0.739</code></pre>
 <span id="cb21-6"><a href="#cb21-6"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(p1,p2,<span class="at">nrow=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="q_index_files/figure-revealjs/maq-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/maq-1.png" width="960" class="r-stretch"></section>
 <section id="arima-models" class="slide level2">
 <h2>ARIMA models</h2>
 <ul>
@@ -795,7 +795,7 @@ y_{t} = c+ \phi_{1}y_{t - 1} +\cdots  +\phi_{p}y_{t-p} \\
 <span id="cb22-4"><a href="#cb22-4"></a>  <span class="fu">ggtitle</span>(<span class="st">"US consumption"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="q_index_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
 <section id="fit-an-arima202" class="slide level2">
 <h2>fit an ARIMA(2,0,2)</h2>
 <div class="cell">
@@ -838,7 +838,7 @@ sigma^2 estimated as 0.3417:  log likelihood = -165.14,  aic = 342.28</code></pr
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>fit <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>(<span class="at">include=</span><span class="dv">80</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="q_index_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
 <section id="understanding-arima-models" class="slide level2">
 <h2>Understanding ARIMA models</h2>
 <ul>
@@ -901,7 +901,7 @@ sigma^2 estimated as 0.3417:  log likelihood = -165.14,  aic = 342.28</code></pr
 <span id="cb27-3"><a href="#cb27-3"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(p1,p2,<span class="at">nrow=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="q_index_files/figure-revealjs/usconsumptionacf-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/usconsumptionacf-1.png" width="960" class="r-stretch"></section>
 <section id="acf-and-pacf-interpretation" class="slide level2">
 <h2>ACF and PACF interpretation</h2>
 <p><strong>AR(1)</strong> <span class="math display">\[rho_k =\phi_1^k \text{  for k=1,2,}\dots\]</span></p>
@@ -969,7 +969,7 @@ sigma^2 estimated as 0.3417:  log likelihood = -165.14,  aic = 342.28</code></pr
 <span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">ggtitle</span>(<span class="st">"Is this a random walk with drift?"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
-<img data-src="q_index_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
 <section id="simulation-1-1" class="slide level2">
 <h2>Simulation 1</h2>
 <div class="cell">
@@ -983,7 +983,7 @@ sigma^2 estimated as 0.3417:  log likelihood = -165.14,  aic = 342.28</code></pr
 </div>
 <p>] .pull-right-wide[</p>
 
-<img data-src="q_index_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
 <section>
 <section id="a-rule-based-arima-algorithm" class="title-slide slide level1 center">
 <h1>A rule-based ARIMA algorithm</h1>
@@ -1048,7 +1048,7 @@ sigma^2 estimated as 0.3417:  log likelihood = -165.14,  aic = 342.28</code></pr
 </div><div class="column">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="q_index_files/figure-revealjs/unnamed-chunk-19-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-19-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1065,7 +1065,7 @@ sigma^2 estimated as 0.3417:  log likelihood = -165.14,  aic = 342.28</code></pr
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">ggtsdisplay</span>(<span class="fu">diff</span>(<span class="fu">log</span>(vix_ts)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="q_index_files/figure-revealjs/unnamed-chunk-21-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-21-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1173,7 +1173,7 @@ AIC=-5741.42   AICc=-5741.38   BIC=-5706.16</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">checkresiduals</span>(fit, <span class="at">test=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="q_index_files/figure-revealjs/unnamed-chunk-28-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-28-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1190,7 +1190,7 @@ AIC=-5741.42   AICc=-5741.38   BIC=-5706.16</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>fit <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">252</span>) <span class="sc">%&gt;%</span> autoplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="q_index_files/figure-revealjs/unnamed-chunk-30-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-30-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1207,7 +1207,7 @@ AIC=-5741.42   AICc=-5741.38   BIC=-5706.16</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">checkresiduals</span>(fit.auto,<span class="at">test =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="q_index_files/figure-revealjs/unnamed-chunk-32-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-32-1.png" width="960"></p>
 </div>
 </div>
 </div>
@@ -1224,7 +1224,7 @@ AIC=-5741.42   AICc=-5741.38   BIC=-5706.16</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>fit.auto <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">252</span>) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="q_index_files/figure-revealjs/unnamed-chunk-34-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-34-1.png" width="960"></p>
 </div>
 </div>
 </div><section id="modelling-procedure-with-arima" class="slide level2 small">
@@ -1265,7 +1265,7 @@ AIC=-5741.42   AICc=-5741.38   BIC=-5706.16</code></pre>
 <span id="cb50-7"><a href="#cb50-7"></a><span class="fu">autoplot</span>(r2000r_m_ts) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Year"</span>) <span class="sc">+</span></span>
 <span id="cb50-8"><a href="#cb50-8"></a>  <span class="fu">ylab</span>(<span class="st">"monthly log returns"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="q_index_files/figure-revealjs/r2000r1-1.png" width="960"></p>
+<p><img data-src="index_files/figure-revealjs/r2000r1-1.png" width="960"></p>
 </div>
 </div>
 </div><div class="column">
@@ -1284,7 +1284,7 @@ AIC=-5741.42   AICc=-5741.38   BIC=-5706.16</code></pre>
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">ggtsdisplay</span>(r2000r_m_ts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="q_index_files/figure-revealjs/r2000r2-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/r2000r2-1.png" width="960" class="r-stretch"></section>
 
 </div>
 <div class="column">
@@ -1345,7 +1345,7 @@ Model df: 4.   Total lags used: 10</code></pre>
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>fit <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">24</span>) <span class="sc">%&gt;%</span> autoplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="q_index_files/figure-revealjs/unnamed-chunk-36-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-36-1.png" width="960" class="r-stretch"></section>
 <section id="understanding-the-arima-output" class="slide level2">
 <h2>Understanding the ARIMA output</h2>
 <div class="cell">
@@ -1421,19 +1421,19 @@ AIC=-1161.68   AICc=-1161.46   BIC=-1137.96</code></pre>
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="q_index_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="index_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="q_index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="q_index_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="q_index_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="q_index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="q_index_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="index_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="index_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="index_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="q_index_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="q_index_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="q_index_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="q_index_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="index_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="index_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="index_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="index_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
