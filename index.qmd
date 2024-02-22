@@ -1,6 +1,6 @@
 ---
 title: "Time series models" 
-author: "Barry Quinn"
+author: "Barry Quinn <br> <span class='glowinline' Digital Dave</span>"
 footer: "Advanced Financial Data Analytics"
 css: mycssblend.css
 logo: img/qbslogo.png
@@ -10,7 +10,9 @@ format:
   revealjs:
     slide-number: c/t
     scrollable: true
-    
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r setup1, include=FALSE}
@@ -24,32 +26,33 @@ library(tidyquant)
 library(latex2exp)
 ```
 
-
 ## Learning outcomes
 
-::: {.saltinline}
-- Stationary and differencing
-- Modelling stationary time series
-- ARIMA models (liner model)
-- Categories of algorithms in capital markets
-- Algorithmic ARIMA modelling
-- Practical example with some of the project data
+::: saltinline
+-   Stationary and differencing
+-   Modelling stationary time series
+-   ARIMA models (liner model)
+-   Categories of algorithms in capital markets
+-   Algorithmic ARIMA modelling
+-   Practical example with some of the project data
 :::
 
 ## Stationarity and differencing
-::: {.acidinline}
-* The foundation of statistical inference in time series analysis is the concept of weak stationarity.
-*  roughly horizontal
-*  constant variance
-*  no patterns predictable in the long-term
+
+::: acidinline
+-   The foundation of statistical inference in time series analysis is
+    the concept of weak stationarity.
+-   roughly horizontal
+-   constant variance
+-   no patterns predictable in the long-term
 :::
 
-## {.your-turn}
+##  {.your-turn}
 
 Are these financial time series stationary?
 
 ::: columns
-:::{.column}
+::: column
 ```{r}
 tsfe::indices %>%
   select(date,`RUSSELL 2000 - PRICE INDEX`) %>%
@@ -60,8 +63,8 @@ tsfe::indices %>%
   autoplot(r2000r_m_ts) + ylab("Log returns") + xlab("Year") + labs(title="Figure 2: Monthly log returns of the Russell 2000 Price Index",subtitle =" from March 1988 to December 2019")
 ```
 :::
-::: {.column}
 
+::: column
 ```{r}
 autoplot(tsfe::carnival_eps_ts) + xlab("Year") + ylab("Earnings") +
   labs(title="Figure 3:",subtitle =  "Quarterly earnings per share for Carnival Plc from the first quarter of 1994 to the fourth quarter of 2019")
@@ -69,39 +72,44 @@ autoplot(tsfe::carnival_eps_ts) + xlab("Year") + ylab("Earnings") +
 :::
 :::
 
+## Inference and stationarity {.smaller}
 
-## Inference and stationarity{.smaller}
-
-* The monthly log returns of Russell 2000 index vary around zero over time.
-  * If we divide up the data into subperiods we would expect each sample mean to be roughly zero.
-* Furthermore, expect the recent financial crisis (2007-2009), the log returns range is approximately [-0.2,0.2].
-* Statistically, the mean and the variance are constant over time OR time invariant. 
-* Put together these to time invariant properties characterise a weakly stationary series.
+-   The monthly log returns of Russell 2000 index vary around zero over
+    time.
+    -   If we divide up the data into subperiods we would expect each
+        sample mean to be roughly zero.
+-   Furthermore, expect the recent financial crisis (2007-2009), the log
+    returns range is approximately \[-0.2,0.2\].
+-   Statistically, the mean and the variance are constant over time OR
+    time invariant.
+-   Put together these to time invariant properties characterise a
+    weakly stationary series.
 
 ## Weak stationarity and prediction
 
-* Weak form stationarity provides a basic framework for prediction.
-* For the monthly log returns of the Russell 2000 we can predict with reasonable confidence:
-* Future monthly returns $\approx0$ and vary $[-0.2,0.2]$
-
+-   Weak form stationarity provides a basic framework for prediction.
+-   For the monthly log returns of the Russell 2000 we can predict with
+    reasonable confidence:
+-   Future monthly returns $\approx0$ and vary $[-0.2,0.2]$
 
 ## Inference and nonstationarity
 
-* Consider quarterly earnings for Carnival Plc.
+-   Consider quarterly earnings for Carnival Plc.
+
 ```{r}
 library(fpp2)
 tsfe::carnival_eps_ts |> autoplot()
 ```
 
-
 ## Inference and nonstationarity
 
-* If the timespan is divided into subperiods the sample mean and variance for each period show increasing pattern.
-* Earnings are **not** weakly stationary.
-* There does exist models and methods for modelling such nonstationary series.
+-   If the timespan is divided into subperiods the sample mean and
+    variance for each period show increasing pattern.
+-   Earnings are **not** weakly stationary.
+-   There does exist models and methods for modelling such nonstationary
+    series.
 
-
-:::{.your-turn}
+::: your-turn
 ## Is the VIX time series Stationary?
 
 ```{r}
@@ -112,24 +120,24 @@ tq_get('^VIX') %>%
 ```
 :::
 
-
 ## Non-stationarity in the mean
 
-- Identifying non-stationary series: 
+-   Identifying non-stationary series:
 
-* time plot.
-* The ACF of stationary data drops to zero relatively quickly
-* The ACF of non-stationary data decreases slowly.
-* For non-stationary data, the value of $r_1$ is often
-     large and positive.
+-   time plot.
 
+-   The ACF of stationary data drops to zero relatively quickly
+
+-   The ACF of non-stationary data decreases slowly.
+
+-   For non-stationary data, the value of $r_1$ is often large and
+    positive.
 
 ## Example: FTSE index
 
 ```{r}
 autoplot(ftse_m_ts) + ylab("Monthly Price Index") + xlab("Year")
 ```
-
 
 ## ACF
 
@@ -138,26 +146,29 @@ ggAcf(ftse_m_ts)
 ```
 
 ## First differencing
+
 ```{r}
 autoplot(diff(ftse_m_ts)) + ylab("Change in monthly FTSE Index") + xlab("Year")
 ```
 
 ### ACF after first differencing
+
 ```{r}
 ggAcf(diff(ftse_m_ts))
 ```
 
-
 ## Differencing {.saltinline}
 
-* Differencing helps to **stabilize the mean**.
-* The differenced series is the *change* between each observation in the original series: ${y'_t = y_t - y_{t-1}}$.
-* The differenced series will have only $T-1$ values since it is not possible to calculate a difference $y_1'$ for the first observation.
-
+-   Differencing helps to **stabilize the mean**.
+-   The differenced series is the *change* between each observation in
+    the original series: ${y'_t = y_t - y_{t-1}}$.
+-   The differenced series will have only $T-1$ values since it is not
+    possible to calculate a difference $y_1'$ for the first observation.
 
 ## Financial ratio example
 
 ### subset using `window()`
+
 ```{r carnival1}
 #| echo: true
 window(carnival_eps_ts,end=c(2010,1)) %>% autoplot()
@@ -165,7 +176,7 @@ window(carnival_eps_ts,end=c(2010,1)) %>% autoplot()
 
 ## use `log()` to stablise variation
 
-```{r carnival2} 
+```{r carnival2}
 window(carnival_eps_ts,end=c(2010,1)) %>% log() %>% autoplot()
 ```
 
@@ -176,100 +187,103 @@ window(carnival_eps_ts,end=c(2010,1)) %>%
   log() %>% diff(lag=4) %>%  autoplot()
 ```
 
-
 ## Is this now stationary {.your-turn}
 
 ```{r carnival4}
 window(carnival_eps_ts,end=c(2010,1)) %>% log() %>% diff(lag=4) %>% diff(lag=1) %>% autoplot()
 ```
 
+##  {.discussion .small}
 
-## {.discussion .small}
-
-* Seasonally differenced series is closer to being stationary.
-* Remaining non-stationarity can be removed with further first difference.
-* If $y'_t = y_t - y_{t-12}$ denotes seasonally differenced series, then twice-differenced series i
-* When both seasonal and first differences are applied
-* it makes no difference which is done first the result will be the same.
-* If seasonality is strong, we recommend that seasonal differencing be done first because sometimes the resulting series will be stationary and there will be no need for further first difference.
-* It is important that if differencing is used, the differences are interpretable.
-
+-   Seasonally differenced series is closer to being stationary.
+-   Remaining non-stationarity can be removed with further first
+    difference.
+-   If $y'_t = y_t - y_{t-12}$ denotes seasonally differenced series,
+    then twice-differenced series i
+-   When both seasonal and first differences are applied
+-   it makes no difference which is done first the result will be the
+    same.
+-   If seasonality is strong, we recommend that seasonal differencing be
+    done first because sometimes the resulting series will be stationary
+    and there will be no need for further first difference.
+-   It is important that if differencing is used, the differences are
+    interpretable.
 
 ## Interpretation of differencing {.heatinline}
 
-* first differences are the change between **one observation and the next**;
-* seasonal differences are the change between **one year to the next**.
+-   first differences are the change between **one observation and the
+    next**;
 
-* But taking lag 3 differences for yearly data, for example, results in a model which cannot be sensibly interpreted.
+-   seasonal differences are the change between **one year to the
+    next**.
+
+-   But taking lag 3 differences for yearly data, for example, results
+    in a model which cannot be sensibly interpreted.
 
 ## Unit root tests
 
-::: columns
-::: {.column}
+> Statistical tests to determine the required order of differencing
 
->Statistical tests to determine the required order of differencing
-
-1. Augmented Dickey Fuller test: null hypothesis is that the data are non-stationary and non-seasonal.
-2. Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test: null  hypothesis is that the data are stationary and non-seasonal.
-3. Other tests available for seasonal data.
-
-:::
-::: {.column}
+1.  Augmented Dickey Fuller test: null hypothesis is that the data are
+    non-stationary and non-seasonal.
+2.  Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test: null hypothesis is
+    that the data are stationary and non-seasonal.
+3.  Other tests available for seasonal data.
 
 ## KPSS test
+
 ```{r, echo=TRUE}
 library(urca)
 summary(ur.kpss(ftse_m_ts))
 ```
 
-:::
-:::
-
 ## Automatically selecting differences
 
-- Seasonal strength $F_s = \max\big(0, 1-\frac{\text{Var}(R_t)}{\text{Var}(S_t+R_t)}\big)$
+-   Seasonal strength
+    $F_s = \max\big(0, 1-\frac{\text{Var}(R_t)}{\text{Var}(S_t+R_t)}\big)$
 
-- If $F_s > 0.64$, do one seasonal difference.
+-   If $F_s > 0.64$, do one seasonal difference.
 
 ```{r, echo=TRUE}
 carnival_eps_ts %>% log() %>% nsdiffs()
 carnival_eps_ts %>% log() %>% diff(lag=4) %>% ndiffs()
 ```
 
-
 ## Non-seasonal ARIMA models {.smaller}
 
 #### Autoregressive models
 
-* When $y_t$ has a statistically significant lag-1 autocorrelation, the lagged value $y_{t-1}$ might be a useful in predicting $y_t$.
-* AR(1) model
+-   When $y_t$ has a statistically significant lag-1 autocorrelation,
+    the lagged value $y_{t-1}$ might be a useful in predicting $y_t$.
+-   AR(1) model
 
 $$y_{t}= c+\phi_{1}y_{t - 1} + \varepsilon_{t}$$
 
-* where $\varepsilon_t$ is white noise.  
-* This is a simple linear regression with **lagged values** of $y_t$ as predictors.
+-   where $\varepsilon_t$ is white noise.\
 
-* This simple model is widely used in stochastic volatility when $y_t$ is replaced by its log volatility.
+-   This is a simple linear regression with **lagged values** of $y_t$
+    as predictors.
 
+-   This simple model is widely used in stochastic volatility when $y_t$
+    is replaced by its log volatility.
 
 ## Autoregressive models
 
-* More generally, if the  $E(y_{t-1})$ is determined by more than lag-1 we can generalise a AR(1) to an AR(p) model.
+-   More generally, if the $E(y_{t-1})$ is determined by more than lag-1
+    we can generalise a AR(1) to an AR(p) model.
 
-- $$y_{t}= c+\phi_{1}y_{t - 1}+\phi_{2}y_{t - 2} + \dots +\phi_{p}y_{t - p}  + \varepsilon_{t},$$
-where $\varepsilon_t$ is white noise.  
--
-This is a multiple linear regression with **lagged values** of $y_t$ as predictors.
+-   $$y_{t}= c+\phi_{1}y_{t - 1}+\phi_{2}y_{t - 2} + \dots +\phi_{p}y_{t - p}  + \varepsilon_{t},$$
+    where $\varepsilon_t$ is white noise.\
 
+-   This is a multiple linear regression with **lagged values** of $y_t$
+    as predictors.
 
 ## Example of an AR(1) model
 
-### Simulating an AR(1)
-
 ::: columns
-::: {.column}
-* Simulating an $y_{t} =2 -0.8 y_{t - 1}+\varepsilon_{t}$
-* where $\varepsilon_t\sim N(0,1)$ for  $T=100$.
+::: column
+-   Simulating an $y_{t} =2 -0.8 y_{t - 1}+\varepsilon_{t}$
+-   where $\varepsilon_t\sim N(0,1)$ for $T=100$.
 
 ```{r arp, eval=FALSE}
 set.seed(1)
@@ -277,7 +291,8 @@ autoplot(10 + arima.sim(list(ar = -0.8), n = 100)) +
   ylab("") + ggtitle("AR(1)")
 ```
 :::
-::: {.column}
+
+::: column
 ```{r arp1, echo=FALSE}
 set.seed(1)
 autoplot(10 + arima.sim(list(ar = -0.8), n = 100)) +
@@ -290,44 +305,50 @@ autoplot(10 + arima.sim(list(ar = -0.8), n = 100)) +
 ## Simulating an AR(2)
 
 ::: columns
-::: {.column}
+::: {.column .small}
+-   Simulating an $y_t = 8 + 1.3y_{t-1} - 0.7 y_{t-2} + \varepsilon_t$
 
-* Simulating an $y_t = 8 + 1.3y_{t-1} - 0.7 y_{t-2} + \varepsilon_t$
-
-* where $\varepsilon_t\sim N(0,1)$ for  $T=100$.
+-   where $\varepsilon_t\sim N(0,1)$ for $T=100$.
 
 ```{r arp3, eval=FALSE}
 set.seed(1)
 autoplot(20 + arima.sim(list(ar = c(1.3, -0.7)), n = 100)) + ylab("") + ggtitle("AR(2)")
 ```
 :::
-::: {.column}
 
+::: column
 ```{r arp4, echo=FALSE}
 set.seed(1)
 autoplot(20 + arima.sim(list(ar = c(1.3, -0.7)), n = 100)) + ylab("") + ggtitle("AR(2)")
 
 ```
+:::
+:::
 
-## AR(1) models explained
+## AR(1) models explained {.small}
 
-$$y_{t}=c + \phi_1 y_{t -1}+\varepsilon_{t}$$
-* When $\phi_1=0$, $y_t$ is **equivalent to White Noise**
-* When $\phi_1=1$ and $c=0$, $y_t$ is **equivalent to a Random Walk**
-* When $\phi_1=1$ and $c\ne0$, $y_t$ is **equivalent to a Random Walk with drift**
-* When $\phi_1<0$, $y_t$ tends to **oscillate between positive and negative values**.
+$$y_{t}=c + \phi_1 y_{t -1}+\varepsilon_{t}$$ When $\phi_1=0$, $y_t$ is
+**equivalent to White Noise**
 
+When $\phi_1=1$ and $c=0$, $y_t$ is **equivalent to a Random Walk**
+
+When $\phi_1=1$ and $c\ne0$, $y_t$ is **equivalent to a Random Walk with
+drift**
+
+When $\phi_1<0$, $y_t$ tends to **oscillate between positive and
+negative values**.
 
 ## Moving Average (MA) models
 
-- Moving Average (MA) models:
+-   Moving Average (MA) models:
 
 $$y_{t} =c +\varepsilon_t + \theta_{1}\varepsilon_{t - 1} + \theta_{2}\varepsilon_{t - 2} +\cdots+\theta_{q}\varepsilon_{t - q},$$
-- where $\varepsilon_t$ is white noise.
-- This is a multiple regression with  **past errors** as predictors. **Don't confuse this with moving average smoothing!**
+
+where $\varepsilon_t$ is white noise. - This is a multiple regression
+with **past errors** as predictors. **Don't confuse this with moving
+average smoothing!**
 
 ## Simulated MA model {.small}
-
 
 ```{r maq}
 set.seed(2)
@@ -338,15 +359,12 @@ p2 <- autoplot(arima.sim(list(ma = c(-1, +0.8)), n = 100)) +
 gridExtra::grid.arrange(p1,p2,nrow=1)
 ```
 
-
-
 ## ARIMA models
 
-- Autoregressive Integrated Moving Average models
+Autoregressive Integrated Moving Average models
 
-:::{.discussion}
-Autoregressive Moving Average models
-$$
+::: fatinline
+Autoregressive ~~Integrated~~ Moving Average models (ARMA) $$
 \begin{align*}
 y_{t} = c+ \phi_{1}y_{t - 1} +\cdots  +\phi_{p}y_{t-p} \\
  \theta_{1}\varepsilon_{t - 1} + \cdots +\theta_{q}\varepsilon_{t-q} +\varepsilon_{t}.
@@ -354,39 +372,37 @@ y_{t} = c+ \phi_{1}y_{t - 1} +\cdots  +\phi_{p}y_{t-p} \\
 $$
 :::
 
-## ARIMA models
+## ARIMA models {.smaller}
 
-* Predictors include both **lagged values of $y_t$ and lagged errors.**
-* Conditions on coefficients ensure stationarity.
-* Conditions on coefficients ensure invertibility.
-* Combine ARMA model with **differencing**.
-
+-   Predictors include both **lagged values of** $y_t$ and lagged
+    errors.
+-   Conditions on coefficients ensure stationarity.
+-   Conditions on coefficients ensure invertibility.
+-   Combine ARMA model with **differencing**.
 
 ## ARIMA models notation
 
-::: columns
-::: {.column .small}
+-   ARIMA(p, d, q) model
+-   AR part: p = order of the autoregressive part
+-   I part: d = degree of first differencing involved
+-   MA part: q = order of the moving average part.
+-   ARIMA(1,1,1) model:
+    $$(y_t-y_{t-1}) =c + \phi_1 (y_{t-1}- y_{t-2}) +\theta_1\varepsilon_{t-1} + \varepsilon_t$$
+-   These componets are the integrated parts
+    $(y_t-y_{t-1}) \dots (y_{t-1}- y_{t-2})$
 
-- Autoregressive Integrated Moving Average models
-- ARIMA(p, d, q) model
-- AR part: p = order of the autoregressive part 
-- I part: d = degree of first differencing involved
-- MA part: q = order of the moving average part.
-- ARIMA(1,1,1) model:
-$$(y_t-y_{t-1}) =c + \phi_1 (y_{t-1}- y_{t-2}) +\theta_1\varepsilon_{t-1} + \varepsilon_t$$
-:::
-::: {.column .small}
-* White noise model:  ARIMA(0,0,0)
-* Random walk:  ARIMA(0,1,0) with no constant
-* Random walk with drift:  ARIMA(0,1,0) with `constant term`
-* AR(p): ARIMA(p,0,0)
-* MA(q): ARIMA(0,0,q)
-:::
-:::
+## ARIMA models notation
+
+-   White noise model: ARIMA(0,0,0)
+-   Random walk: ARIMA(0,1,0) with no constant
+-   Random walk with drift: ARIMA(0,1,0) with `constant term`
+-   AR(p): ARIMA(p,0,0)
+-   MA(q): ARIMA(0,0,q)
 
 ## ARIMA modelling of US consumption
 
 ### The data
+
 ```{r}
 autoplot(uschange[,"Consumption"]) +
   xlab("Year") +
@@ -395,6 +411,7 @@ autoplot(uschange[,"Consumption"]) +
 ```
 
 ## fit an ARIMA(2,0,2)
+
 ```{r, echo=TRUE}
 #| echo: true
 ((fit <- arima(uschange[,"Consumption"],order = c(2,0,2))))
@@ -414,67 +431,117 @@ sigma2=round(fit$sigma2,3) %>% unname()
 
 ## The estimated model
 
-- $y_t = c + `r ar1`y_{t-1} `r ar2`y_{t-2}`r ma1` \varepsilon_{t-1}+ `r ma2`\varepsilon_{t-2}+ \varepsilon_{t}$
-- where $c= `r intercept`$
-- and $\varepsilon_t$ is white noise with a standard deviation of $`r sigma` = \sqrt{`r sigma2`}$. 
+-   $y_t = c + `r ar1`y_{t-1} `r ar2`y_{t-2}`r ma1` \varepsilon_{t-1}+ `r ma2`\varepsilon_{t-2}+ \varepsilon_{t}$
+-   where $c= `r intercept`$
+-   and $\varepsilon_t$ is white noise with a standard deviation of
+    $`r sigma` = \sqrt{`r sigma2`}$.
 
 ## Forecasts from estimated model
+
+### The forecasted data
+
+-   The data is point estimates based on some frequentist asymptotic
+    theory
+
+```{r, echo=TRUE}
+fit %>% forecast(h=10)
+```
+
+## Forecasts from estimated model
+
+### Plotting the forecasts
+
+-   The points estimates are visualised as banded limits at the 80% and
+    95% forecasting levels
 
 ```{r, echo=TRUE}
 fit %>% forecast(h=10) %>% autoplot(include=80)
 ```
 
+## {.your-turn .small}
+-   A. There is a 95% probability that the population mean falls within
+    the calculated confidence interval.
+-   B. If we were to draw 100 different samples and compute a 95%
+    confidence interval for each sample, we would expect about 95 of
+    these intervals to contain the population mean.
+-   C. The population mean is 95% likely to be the center point of the
+    calculated confidence interval.
+-   D. There is a 95% chance that any given sample mean falls within the
+    calculated confidence interval.
+-   E. The calculated confidence interval captures the range within
+    which 95% of the population data falls.
+
+
+## Understanding ARIMA models {.small}
+
+-   If $c=0$ and $d=0$, the long-term forecasts will go to zero.
+-   If $c=0$ and $d=1$, the long-term forecasts will go to a non-zero
+    constant.
+-   If $c=0$ and $d=2$, the long-term forecasts will follow a straight
+    line.
+-   If $c\ne0$ and $d=0$, the long-term forecasts will go to the mean of
+    the data.
+-   If $c\ne0$ and $d=1$, the long-term forecasts will follow a straight
+    line.
+-   If $c\ne0$ and $d=2$, the long-term forecasts will follow a
+    quadratic trend.
 
 ## Understanding ARIMA models
 
-* If $c=0$ and $d=0$, the long-term forecasts will go to zero.
-* If $c=0$ and $d=1$, the long-term forecasts will go to a non-zero constant.
-* If $c=0$ and $d=2$, the long-term forecasts will follow a straight line.
-* If $c\ne0$ and $d=0$, the long-term forecasts will go to the mean of the data.
-* If $c\ne0$ and $d=1$, the long-term forecasts will follow a straight line.
-* If $c\ne0$ and $d=2$, the long-term forecasts will follow a quadratic trend.
-
-
-## Understanding ARIMA models
 ### Forecast variance and $d$
 
-* The higher the value of $d$, the more rapidly the prediction intervals increase in size.
-* For $d=0$, the long-term forecast standard deviation will go to the standard deviation of the historical data.
+-   The higher the value of $d$, the more rapidly the prediction
+    intervals increase in size.
+-   For $d=0$, the long-term forecast standard deviation will go to the
+    standard deviation of the historical data.
+
+## Understanding ARIMA models {.smaller}
 
 ### Cyclic behaviour
-* For cyclic forecasts,  $p\ge2$ and some restrictions on coefficients are required.
-* If $p=2$, we need $\phi_1^2+4\phi_2<0$. Then average length of stochastic cycles is
+
+-   For cyclic forecasts, $p\ge2$ and some restrictions on coefficients
+    are required.
+-   If $p=2$, we need $\phi_1^2+4\phi_2<0$. Then average length of
+    stochastic cycles is
 
 $$(2\pi)/\left[\text{arc cos}(-\phi_1(1-\phi_2)/(4\phi_2))\right].$$
 
-* This formula has important uses in estimation business and economic cycles. (See Example 2.3 in Tsay (2010))
+-   This formula has important uses in estimation business and economic
+    cycles. (See Example 2.3 in Tsay (2010))
 
+## Model building {.small}
 
-## Model building
+### Maximum likelihood estimation  (MLE)
 
-### Maximum likelihood estimation
+-   Having identified the model order, we need to estimate the
+    parameters $c,\phi_1,\dots,\phi_p \text{  }\theta_1,\dots,\theta_q$.
 
-- Having identified the model order, we need to estimate the parameters $c,\phi_1,\dots,\phi_p \text{  }\theta_1,\dots,\theta_q$.
+-   MLE is very similar to least squares estimation obtained by
+    minimizing $\sum_{t-1}^T e_t^2$
 
-* MLE is very similar to least squares estimation obtained by minimizing $\sum_{t-1}^T e_t^2$
-* The `Arima()` command allows CLS or MLE estimation.
-* Non-linear optimization must be used in either case.
-* Different software will give different estimates.
+-   The `Arima()` command allows MLE estimation and constrained least squares(CLS).
 
+-   Non-linear optimization must be used in either case.
+
+-   Different software will give different estimates.
 
 ## Partial autocorrelations {.small}
 
-- Partial autocorrelations} measure relationship between $y_{t}$  and  $y_{t - k}$, when the effects of other time lags $1,2, 3, \dots, k - 1$are removed.
+-   Partial autocorrelations} measure relationship between $y_{t}$ and
+    $y_{t - k}$, when the effects of other time lags
+    $1,2, 3, \dots, k - 1$are removed.
 
-- $\alpha_k$= $k$th partial autocorrelation coefficient
-- $\alpha_k${equal to the estimate of $b_k$ in regression:
+-   $\alpha_k$= $k$th partial autocorrelation coefficient
+
+-   $\alpha_k${equal to the estimate of $b_k$ in regression:
 
 $$y_t = c + \phi_1 y_{t-1} + \phi_2 y_{t-2} + \dots + \phi_k y_{t-k}$$
 
-* Varying number of terms on RHS gives $\alpha_k$ for different values of $k$.
-* There are more efficient ways of calculating $\alpha_k$.
-* $\alpha_1=\rho_1$
-* same critical values of $\pm 1.96/\sqrt{T}$ as for ACF.
+-   Varying number of terms on RHS gives $\alpha_k$ for different values
+    of $k$.
+-   There are more efficient ways of calculating $\alpha_k$.
+-   $\alpha_1=\rho_1$
+-   same critical values of $\pm 1.96/\sqrt{T}$ as for ACF.
 
 ## Example: US consumption
 
@@ -484,76 +551,79 @@ p2 <- ggPacf(uschange[,"Consumption"],main="")
 gridExtra::grid.arrange(p1,p2,nrow=1)
 ```
 
-
 ## ACF and PACF interpretation
 
-**AR(1)**
-$$rho_k =\phi_1^k \text{  for k=1,2,}\dots$$
+**AR(1)** $$rho_k =\phi_1^k \text{  for k=1,2,}\dots$$
 
 $$\alpha_1= \phi_1 \alpha_k = 0\text{for k=2,3}\dots$$
 
 So we have an AR(1) model when
 
-* autocorrelations exponentially decay
-* there is a single significant partial autocorrelation.
+-   autocorrelations exponentially decay
+-   there is a single significant partial autocorrelation.
 
+## ACF and PACF interpretation{.small}
 
-## ACF and PACF interpretation
-
-**AR(p)**
-  * ACF dies out in an exponential or damped sine-wave manner
-  * PACF has all zero spikes beyond the $p$th spike
+- **AR(p)** 
+- ACF dies out in an exponential or damped sine-wave manner
+- PACF has all zero spikes beyond the $p$th spike
 
 So we have an AR(p)) model when
 
-  * the ACF is  exponentially decaying or sinusoidal
-  * there is a significant spike at lag $p$ in PACF, but none beyond $p$
+- the ACF is exponentially decaying or sinusoidal
+- there is a significant spike at lag $p$ in PACF, but none beyond $p$
 
-## 
+## **MA(1)** based on ACF and PACF 
 
-**MA(1)**
 $$
 \begin{align*}
 \rho_1 &= \theta_1 \qquad \rho_k = 0\qquad\text{for k=2,3,...};\\
 \alpha_k &= -(-\theta_1)^k
 \end{align*}
-$$
-So we have an MA(1) model when
- * the PACF is  exponentially decaying and
- * there is a single significant spike in ACF
+$$ 
 
-##
+- So we have an MA(1) model when 
+- the PACF is exponentially decaying
 
-**MA(q)**
+- and there is a single significant spike in ACF
 
- * PACF dies out in an exponential or damped sine-wave manner
- * ACF has all zero spikes beyond the $q$th spike
+##  More generally picking q for **MA(q)**
+
+-   PACF dies out in an exponential or damped sine-wave manner
+-   ACF has all zero spikes beyond the $q$th spike
 
 So we have an MA(q) model when
 
-  * the PACF is  exponentially decaying or sinusoidal
-  * there is a significant spike at lag $q$ in ACF, but none beyond $q$
+-   the PACF is exponentially decaying or sinusoidal
+-   there is a significant spike at lag $q$ in ACF, but none beyond $q$
 
 ## Information criteria for model selection {.smaller}
 
-- In advanced financial modelling we use information theory to scientifically determine which of our model choices contains the most statistical information.
+-   In advanced financial modelling we use information theory to
+    scientifically determine which of our model choices contains the
+    most statistical information.
 
 **Akaike's Information Criterion (AIC):**
 
-$\text{AIC} = -2 \log(L) + 2(p+q+k+1),$  where $L$ is the likelihood of the data, $k=1$ if $c\ne0$ and $k=0$ if $c=0$]
+$\text{AIC} = -2 \log(L) + 2(p+q+k+1),$ where $L$ is the likelihood of
+the data, $k=1$ if $c\ne0$ and $k=0$ if $c=0$\]
 
 **Corrected AIC:** <br>
 $\text{AICc} = \text{AIC} + \frac{2(p+q+k+1)(p+q+k+2)}{T-p-q-k-2}.$
 
-**Bayesian Information Criterion:**<br>
-$\text{BIC} = \text{AIC} + [\log(T)-2](p+q+k-1).$<br>
-Good models are obtained by minimizing either the AIC, AICc or BIC. My preference is to use the AICc.
+## Information criteria for model selection {.smaller}
 
+**Bayesian Information Criterion:**<br>
+$\text{BIC} = \text{AIC} + [\log(T)-2](p+q+k-1).$<br> Good models are
+obtained by minimizing either the AIC, AICc or BIC. My preference is to
+use the AICc.
 
 ## Powerful non-stationary model in finance
 
-- In financial time series an important class on non-stationary times series model is the random walk model
-- A random walk can be define as $y_t=y_{t-1}+ error_t$ or its drift variation $y_t= constant + y_{t-1}+ error_t$
+-   In financial time series an important class on non-stationary times
+    series model is the random walk model
+-   A random walk can be define as $y_t=y_{t-1}+ error_t$ or its drift
+    variation $y_t= constant + y_{t-1}+ error_t$
 
 ## Simulation 1
 
@@ -586,8 +656,8 @@ rw=ts(cumprod(c(S0,chgs)))
 autoplot(rw)  + ylab("") + 
   ggtitle("Is this a random walk with drift?")
 ```
-]
-.pull-right-wide[
+
+
 ```{r}
 #| echo: false
 set.seed(2)
@@ -599,50 +669,54 @@ autoplot(rw)  + ylab("") +
   ggtitle("Is this a random walk with drift?")
 ```
 
+## AI automation for ARIMA models
 
-# A rule-based ARIMA algorithm
+-   `auto.arima()`
 
-- `auto.arima()`
+-   For a non-seasonal ARIMA process we first need to select appropriate
+    orders: $p,q,d$
 
-- For a non-seasonal ARIMA process we first need to select appropriate orders: $p,q,d$
-- We use the [Hyndman and Khandakar (JSS, 2008)](https://www.jstatsoft.org/article/view/v027i03) algorithm:
+-   We use the [Hyndman and Khandakar (JSS,
+    2008)](https://www.jstatsoft.org/article/view/v027i03) algorithm:
 
-* Select no. differences $d$ and $D$ via KPSS test and seasonal strength measure.
-* Select $p,q$ by minimising AICc.
-* Use stepwise search to traverse model space.
+-   Select no. differences $d$ and $D$ via KPSS test and seasonal
+    strength measure.
 
-## How does auto.arima() work?
+-   Select $p,q$ by minimising AICc.
 
+-   Use stepwise search to traverse model space.
+
+## How does auto.arima() work? {.small}
 
 $$\text{AICc} = -2 log(L) + 2(p+q+k+1)\left[1 +
 \frac{(p+q+k+2)}{T-p-q-k-2}\right].$$
 
-- where $L$ is the maximised likelihood fitted to the differenced
-data,
+-   where $L$ is the maximised likelihood fitted to the differenced
+    data,
 
-- $k=1$ if $c\neq 0$ and $k=0$ otherwise.
+-   $k=1$ if $c\neq 0$ and $k=0$ otherwise.
 
+## Algorithmic rule 1:
 
-# Algorithmic rule 1:
+-   Select current model (with smallest AICc) from:
+-   ARIMA$(2,d,2)$
+-   ARIMA$(0,d,0)$
+-   ARIMA$(1,d,0)$
+-   ARIMA$(0,d,1)$
 
-- Select current model (with smallest AICc) from:
-- ARIMA$(2,d,2)$
-- ARIMA$(0,d,0)$
-- ARIMA$(1,d,0)$
-- ARIMA$(0,d,1)$
+## Algorithmic rule 2:
 
+-   Consider variations of current model:
 
-# Algorithmic rule 2:
+-   vary one of $p,q,$ from current model by $\pm1$;
 
-- Consider variations of current model:
+-   $p,q$ both vary from current model by $\pm1$;
 
-* vary one of $p,q,$ from current model by $\pm1$;
-* $p,q$ both vary from current model by $\pm1$;
-* Include/exclude $c$ from current model.
+-   Include/exclude $c$ from current model.
 
-::: {.heatinline}
-- Model with lowest AICc becomes current model.
-- Repeat rule 2 until no lower AICc can be found
+::: heatinline
+-   Model with lowest AICc becomes current model.
+-   Repeat rule 2 until no lower AICc can be found
 :::
 
 ## Example: VIX index
@@ -659,6 +733,7 @@ tidyquant::tq_get('^VIX') %>%
 ggtsdisplay(log(vix_ts))
 ```
 :::
+
 ::: {.column}
 ```{r}
 #| echo: false
@@ -678,6 +753,7 @@ ggtsdisplay(log(vix_ts))
 ggtsdisplay(diff(log(vix_ts)))
 ```
 :::
+
 ::: {.column}
 ```{r}
 ggtsdisplay(diff(log(vix_ts)))
@@ -693,6 +769,7 @@ ggtsdisplay(diff(log(vix_ts)))
 (fit <- Arima(log(vix_ts),order=c(7,1,0)))
 ```
 :::
+
 ::: {.column}
 ```{r}
 (fit <- Arima(log(vix_ts),order=c(7,1,0)))
@@ -708,6 +785,7 @@ ggtsdisplay(diff(log(vix_ts)))
 auto.arima(log(vix_ts))
 ```
 :::
+
 ::: {.column}
 ```{r}
 auto.arima(log(vix_ts))
@@ -717,122 +795,102 @@ auto.arima(log(vix_ts))
 
 ## More careful algorthmic choice
 
-::: columns
-::: {.column}
+::: columns 
+:::{.column}
 
 ```{r tryharder,eval=F,echo=TRUE}
 (fit.auto<-auto.arima(log(vix_ts), 
                       stepwise=FALSE,
                       approximation=FALSE))
 ```
-:::
-::: {.column}
+
+::: 
+:::{.column}
+
 ```{r}
 (fit.auto<-auto.arima(log(vix_ts), 
                       stepwise=FALSE,
                       approximation=FALSE))
 ```
+
+:::
 :::
 
-##
-
-:::{.discussion}
-* Setting both `stepwise` and `approximation` arguments to `FALSE` will slow the automation down but provides a more exhaustive search for the appropriate model.
-* The `auto.arima` function then searches over all possible models using MLE.
-* See `help(auto.arima)` for more details.
-:::
+## {.discussion}
+-   Setting both `stepwise` and `approximation` arguments to `FALSE`
+    will slow the automation down but provides a more exhaustive search
+    for the appropriate model.
+-   The `auto.arima` function then searches over all possible models
+    using MLE.
+-   See `help(auto.arima)` for more details.
 
 ## Human Vs Algo: Residual Diagnostics
 
 ### Human choice
 
-::: columns
-::: {.column}
-```{r,eval=F,echo=T}
-checkresiduals(fit, test=FALSE)
-```
-:::
-::: {.column}
+
 ```{r}
 checkresiduals(fit, test=FALSE)
 ```
-:::
-:::
 
 ## Human forecasting
-::: columns
-::: {.column}
-```{r, eval=F,echo=T}
-fit %>% forecast(h=252) %>% autoplot
-```
-:::
-::: {.column}
+
+
 ```{r}
 fit %>% forecast(h=252) %>% autoplot
 ```
-:::
-:::
 
 ## Algorithm
 
-::: columns
-::: {.column}
 
-```{r,eval=F,echo=T}
-checkresiduals(fit.auto,test = FALSE)
-```
-:::
-::: {.column}
 ```{r}
 checkresiduals(fit.auto,test = FALSE)
 ```
-:::
-:::
 
 ## Algo forecasting
 
-::: columns
-::: {.column}
-```{r,echo=T,eval=F}
-fit.auto %>% forecast(h=252) %>% autoplot()
-```
-:::
-::: {.column}
+
 ```{r}
 fit.auto %>% forecast(h=252) %>% autoplot()
 ```
-:::
 
 ## Modelling procedure with `Arima` {.small}
-### This is sometimes referred to as the Box-Jenkins approach
-1. Plot the data. Identify any unusual observations.
-2. If necessary, transform the data (using a Box-Cox transformation) to stabilize the variance.
-3. If the data are non-stationary: take first differences of the data until the data are stationary.
-4. Examine the ACF/PACF: Is an AR(p) or MA(q) model appropriate?
-5. Try your chosen model(s), and  use the AICc to search for a better model.
-6. Check the residuals from your chosen model by plotting the ACF of the residuals, and doing a portmanteau test of the residuals. If they do not look like white noise, try a modified model.
-7. Once the residuals look like white noise, calculate forecasts.
 
+### This is sometimes referred to as the Box-Jenkins approach
+
+1.  Plot the data. Identify any unusual observations.
+2.  If necessary, transform the data (using a Box-Cox transformation) to
+    stabilize the variance.
+3.  If the data are non-stationary: take first differences of the data
+    until the data are stationary.
+4.  Examine the ACF/PACF: Is an AR(p) or MA(q) model appropriate?
+5.  Try your chosen model(s), and use the AICc to search for a better
+    model.
+6.  Check the residuals from your chosen model by plotting the ACF of
+    the residuals, and doing a portmanteau test of the residuals. If
+    they do not look like white noise, try a modified model.
+7.  Once the residuals look like white noise, calculate forecasts.
 
 ## Modelling procedure with `auto.arima`
 
-1. Plot the data. Identify any unusual observations.
-2. If necessary, transform the data (using logs) to stabilize the variance.
-3. Use `auto.arima` to select a model.
+1.  Plot the data. Identify any unusual observations.
 
-6. Check the residuals from your chosen model by plotting the ACF of the residuals, and doing a portmanteau test of the residuals. If they do not look like white noise, try a modified model.
-7. Once the residuals look like white noise, calculate forecasts.
+2.  If necessary, transform the data (using logs) to stabilize the
+    variance.
 
+3.  Use `auto.arima` to select a model.
 
-# Project based example
+4.  Check the residuals from your chosen model by plotting the ACF of
+    the residuals, and doing a portmanteau test of the residuals. If
+    they do not look like white noise, try a modified model.
 
-:::{.hand}
-Russell 2000 index monthly returns
-:::
+5.  Once the residuals look like white noise, calculate forecasts.
+
+## Project based example {.small}
 
 ::: columns
-::: {.column}
-```{r r2000r1,echo=TRUE}
+::: column
+```{r}
 tsfe::indices %>%
   select(date,`RUSSELL 2000 - PRICE INDEX`) %>%
   rename(r2000=`RUSSELL 2000 - PRICE INDEX`) %>%
@@ -843,36 +901,47 @@ autoplot(r2000r_m_ts) + xlab("Year") +
   ylab("monthly log returns")
 ```
 :::
-::: {.column}
-1. Time plot shows sudden changes, particularly big movements in 2007/2008 due to financial crisis. Otherwise nothing unusual and no need for  data adjustments.
-2. Little evidence of changing variance, so no log transformation needed.
-3. Data are clearly stationary, so no *differencing* required.
+
+::: column
+1.  Time plot shows sudden changes, particularly big movements in
+    2007/2008 due to financial crisis. Otherwise nothing unusual and no
+    need for data adjustments.
+2.  Little evidence of changing variance, so no log transformation
+    needed.
+3.  Data are clearly stationary, so no *differencing* required.
 :::
 :::
 
-# Project based example
+## Project based example
 
-::: columns
+::: columns 
 :::{.column}
+
 ```{r r2000r2,echo=TRUE}
 ggtsdisplay(r2000r_m_ts)
 ```
 :::
-::: {.column}
-4. PACF is suggestive of AR(5). So initial candidate model is ARIMA(5,0,0). No other obvious candidates.
-5. Fit ARIMA(5,0,0) model along with variations: ARIMA(4,0,0), ARIMA(3,0,0), ARIMA(4,0,1), etc. ARIMA(3,0,1) has smallest *AICc* value.
+::: column
+4.  PACF is suggestive of AR(5). So initial candidate model is
+    ARIMA(5,0,0). No other obvious candidates.
+5.  Fit ARIMA(5,0,0) model along with variations: ARIMA(4,0,0),
+    ARIMA(3,0,0), ARIMA(4,0,1), etc. ARIMA(3,0,1) has smallest *AICc*
+    value.
+:::
 :::
 
 ## Project based example
+
 ### Manual fit
 
 ::: columns
-:::{.column}
+::: column
 ```{r,echo=T,eval=F}
 (fit <- Arima(r2000r_m_ts, order=c(3,0,1)))
 ```
 :::
-::: {.column}
+
+::: column
 ```{r r2000r3}
 (fit <- Arima(r2000r_m_ts, order=c(3,0,1)))
 ```
@@ -881,23 +950,23 @@ ggtsdisplay(r2000r_m_ts)
 
 ## Residual check
 
-6. ACF plot of residuals from ARIMA(3,0,1) model look like white noise.
+6.  ACF plot of residuals from ARIMA(3,0,1) model look like white noise.
 
 ```{r r20005,echo=T}
 checkresiduals(fit, plot=FALSE)
 ```
 
 ## Forecasting
+
 ```{r,echo=T}
 fit %>% forecast(h=24) %>% autoplot
 ```
 
-## Understanding the ARIMA output
+## Understanding the ARIMA output {.small}
 
 ```{r r2000r6}
 (fit <- Arima(r2000r_m_ts, order=c(3,0,1)))
 ```
-
 
 ## Understanding the ARIMA output {.small}
 
@@ -909,42 +978,52 @@ ar3=unname(round(fit$coef["ar3"],3))
 ma1=unname(round(fit$coef["ma1"],3))
 ```
 
-* The fitted model is:
+-   The fitted model is:
 
 $$y_t=`r ar1`y_{t-1}`r ar2`y_{t-2}`r ar3`y_{t-3} +`r ma1`\varepsilon_{t-1}+0.008$$
 
-* The standard errors are 0.13, 0.06, 0.05, 0.12 and 0.002, respectively.
-* This suggest that only the AR1 and the constant (mean) are more than 2 SEs away from zero and thus statistically significant.
-* The significance of $\phi_0$ of this entertained model implies that the expected mean return of the series is positive.
+-   The standard errors are 0.13, 0.06, 0.05, 0.12 and 0.002,
+    respectively.
 
-* In fact $\hat{\mu}=`r a`/(1-(`r ar1``r ar2``r ar3`)) =`r round(a/(1-sum(ar1,ar2,ar3)),4)`$ which is small but has long term implications.
+-   This suggest that only the AR1 and the constant (mean) are more than
+    2 SEs away from zero and thus statistically significant.
 
-* Using the multi-period return definition from the financial data lecture an annualised log return is simple $\sum_1^{12} y_t$ $\approx `r round(12*a/(1-sum(ar1,ar2,ar3)),2)`$ per annum. 
+-   The significance of $\phi_0$ of this entertained model implies that
+    the expected mean return of the series is positive.
 
+-   In fact
+    $\hat{\mu}=`r a`/(1-(`r ar1``r ar2``r ar3`)) =`r round(a/(1-sum(ar1,ar2,ar3)),4)`$
+    which is small but has long term implications.
 
-## Frequentist prediction intervals
+-   Using the multi-period return definition from the financial data
+    lecture an annualised log return is simple $\sum_1^{12} y_t$
+    $\approx `r round(12*a/(1-sum(ar1,ar2,ar3)),2)`$ per annum.
 
-$$\hat{y}_{T+h|T} \pm 1.96\sqrt{v_{T+h|T}}$$
-where $v_{T+h|T}$ is estimated forecast variance.
+## Frequentist prediction intervals {.small}
 
-* $v_{T+1|T}=\hat{\sigma}^2$ for all ARIMA models regardless of parameters and orders.
-* Multi-step prediction intervals for ARIMA(0,0,$q$):
+$$\hat{y}_{T+h|T} \pm 1.96\sqrt{v_{T+h|T}}$$ where $v_{T+h|T}$ is
+estimated forecast variance.
+
+-   $v_{T+1|T}=\hat{\sigma}^2$ for all ARIMA models regardless of
+    parameters and orders.
+-   Multi-step prediction intervals for ARIMA(0,0,$q$):
 
 $$\displaystyle y_t = \varepsilon_t + \sum_{i=1}^q \theta_i \varepsilon_{t-i}$$
 
 $$\displaystyle v_{T|T+h} = \hat{\sigma}^2 \left[ 1 + \sum_{i=1}^{h-1} \theta_i^2\right], \qquad\text{for~} h=2,3,\dots.$$
 
-* AR(1): Rewrite as MA($\infty$) and use above result.
-* Other models beyond scope of this subject.
+-   AR(1): Rewrite as MA($\infty$) and use above result.
+-   Other models beyond scope of this subject.
 
-## Prediction intervals
+## Prediction intervals {.small}
 
-* Prediction intervals **increase in size with forecast horizon**.
-* Prediction intervals can be difficult to calculate by hand
-* Calculations assume residuals are **uncorrelated** and **normally distributed**.
-* Prediction intervals tend to be too narrow.
-    * the uncertainty in the parameter estimates has not been accounted for.
-    * the ARIMA model assumes historical patterns will not change during the forecast period.
-    * the ARIMA model assumes uncorrelated future $errors$
-
-
+-   Prediction intervals **increase in size with forecast horizon**.
+-   Prediction intervals can be difficult to calculate by hand
+-   Calculations assume residuals are **uncorrelated** and **normally
+    distributed**.
+-   Prediction intervals tend to be too narrow.
+    -   the uncertainty in the parameter estimates has not been
+        accounted for.
+    -   the ARIMA model assumes historical patterns will not change
+        during the forecast period.
+    -   the ARIMA model assumes uncorrelated future $errors$

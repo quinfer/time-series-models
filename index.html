@@ -8,9 +8,9 @@
 <link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.5.16">
 
-  <meta name="author" content="Barry Quinn">
+  <meta name="author" content="Barry Quinn   <span class=‘glowinline’ Digital Dave">
   <title>Time series models</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -31,7 +31,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -70,7 +70,7 @@
     code span.at { color: #657422; } /* Attribute */
     code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
     code span.ch { color: #20794d; } /* Char */
     code span.cn { color: #8f5902; } /* Constant */
     code span.co { color: #5e5e5e; } /* Comment */
@@ -84,7 +84,7 @@
     code span.fu { color: #4758ab; } /* Function */
     code span.im { color: #00769e; } /* Import */
     code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
     code span.op { color: #5e5e5e; } /* Operator */
     code span.ot { color: #003b4f; } /* Other */
     code span.pp { color: #ad0000; } /* Preprocessor */
@@ -222,7 +222,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -397,7 +398,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Barry Quinn 
+Barry Quinn <br> &lt;span class=‘glowinline’ Digital Dave 
 </div>
 </div>
 </div>
@@ -433,23 +434,31 @@ Barry Quinn
 <div class="columns">
 <div class="column">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>tsfe<span class="sc">::</span>indices <span class="sc">%&gt;%</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>  <span class="fu">select</span>(date,<span class="st">`</span><span class="at">RUSSELL 2000 - PRICE INDEX</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>  <span class="fu">rename</span>(<span class="at">r2000=</span><span class="st">`</span><span class="at">RUSSELL 2000 - PRICE INDEX</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>  <span class="fu">tq_transmute</span>(<span class="at">select =</span>r2000,<span class="at">mutate_fun =</span> periodReturn,<span class="at">type=</span><span class="st">'log'</span>) <span class="ot">-&gt;</span>monthly_r2002r</span>
-<span id="cb1-6"><a href="#cb1-6"></a>  <span class="fu">ts</span>(monthly_r2002r<span class="sc">$</span>monthly.returns, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1988</span>,<span class="dv">1</span>))<span class="ot">-&gt;</span>r2000r_m_ts</span>
-<span id="cb1-7"><a href="#cb1-7"></a>  <span class="fu">autoplot</span>(r2000r_m_ts) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Log returns"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Year"</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Figure 2: Monthly log returns of the Russell 2000 Price Index"</span>,<span class="at">subtitle =</span><span class="st">" from March 1988 to December 2019"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a>tsfe<span class="sc">::</span>indices <span class="sc">%&gt;%</span></span>
+<span id="cb1-2"><a href=""></a>  <span class="fu">select</span>(date,<span class="st">`</span><span class="at">RUSSELL 2000 - PRICE INDEX</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-3"><a href=""></a>  <span class="fu">rename</span>(<span class="at">r2000=</span><span class="st">`</span><span class="at">RUSSELL 2000 - PRICE INDEX</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-4"><a href=""></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb1-5"><a href=""></a>  <span class="fu">tq_transmute</span>(<span class="at">select =</span>r2000,<span class="at">mutate_fun =</span> periodReturn,<span class="at">type=</span><span class="st">'log'</span>) <span class="ot">-&gt;</span>monthly_r2002r</span>
+<span id="cb1-6"><a href=""></a>  <span class="fu">ts</span>(monthly_r2002r<span class="sc">$</span>monthly.returns, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1988</span>,<span class="dv">1</span>))<span class="ot">-&gt;</span>r2000r_m_ts</span>
+<span id="cb1-7"><a href=""></a>  <span class="fu">autoplot</span>(r2000r_m_ts) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Log returns"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Year"</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Figure 2: Monthly log returns of the Russell 2000 Price Index"</span>,<span class="at">subtitle =</span><span class="st">" from March 1988 to December 2019"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div><div class="column">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">autoplot</span>(tsfe<span class="sc">::</span>carnival_eps_ts) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Year"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Earnings"</span>) <span class="sc">+</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Figure 3:"</span>,<span class="at">subtitle =</span>  <span class="st">"Quarterly earnings per share for Carnival Plc from the first quarter of 1994 to the fourth quarter of 2019"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">autoplot</span>(tsfe<span class="sc">::</span>carnival_eps_ts) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Year"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Earnings"</span>) <span class="sc">+</span></span>
+<span id="cb2-2"><a href=""></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"Figure 3:"</span>,<span class="at">subtitle =</span>  <span class="st">"Quarterly earnings per share for Carnival Plc from the first quarter of 1994 to the fourth quarter of 2019"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -481,8 +490,8 @@ Barry Quinn
 <li>Consider quarterly earnings for Carnival Plc.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(fpp2)</span>
-<span id="cb3-2"><a href="#cb3-2"></a>tsfe<span class="sc">::</span>carnival_eps_ts <span class="sc">|&gt;</span> <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">library</span>(fpp2)</span>
+<span id="cb3-2"><a href=""></a>tsfe<span class="sc">::</span>carnival_eps_ts <span class="sc">|&gt;</span> <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
@@ -497,9 +506,9 @@ Barry Quinn
 <section id="is-the-vix-time-series-stationary" class="slide level2 your-turn">
 <h2>Is the VIX time series Stationary?</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">tq_get</span>(<span class="st">'^VIX'</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>date,<span class="at">y=</span>adjusted)) <span class="sc">+</span> </span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">ylab</span>(<span class="st">"VIX"</span>) <span class="sc">+</span> <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">tq_get</span>(<span class="st">'^VIX'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>date,<span class="at">y=</span>adjusted)) <span class="sc">+</span> </span>
+<span id="cb4-3"><a href=""></a>  <span class="fu">ylab</span>(<span class="st">"VIX"</span>) <span class="sc">+</span> <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
@@ -516,30 +525,38 @@ Barry Quinn
 <section id="example-ftse-index" class="slide level2">
 <h2>Example: FTSE index</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">autoplot</span>(ftse_m_ts) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Monthly Price Index"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Year"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">autoplot</span>(ftse_m_ts) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Monthly Price Index"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Year"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
 <section id="acf" class="slide level2">
 <h2>ACF</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">ggAcf</span>(ftse_m_ts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">ggAcf</span>(ftse_m_ts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="index_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
 <section id="first-differencing" class="slide level2">
 <h2>First differencing</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">autoplot</span>(<span class="fu">diff</span>(ftse_m_ts)) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Change in monthly FTSE Index"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Year"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">autoplot</span>(<span class="fu">diff</span>(ftse_m_ts)) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Change in monthly FTSE Index"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Year"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="index_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 <h3 id="acf-after-first-differencing">ACF after first differencing</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">ggAcf</span>(<span class="fu">diff</span>(ftse_m_ts))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="fu">ggAcf</span>(<span class="fu">diff</span>(ftse_m_ts))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="index_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -555,29 +572,29 @@ Barry Quinn
 <h2>Financial ratio example</h2>
 <h3 id="subset-using-window">subset using <code>window()</code></h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">window</span>(carnival_eps_ts,<span class="at">end=</span><span class="fu">c</span>(<span class="dv">2010</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">window</span>(carnival_eps_ts,<span class="at">end=</span><span class="fu">c</span>(<span class="dv">2010</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="index_files/figure-revealjs/carnival1-1.png" width="960" class="r-stretch"></section>
 <section id="use-log-to-stablise-variation" class="slide level2">
 <h2>use <code>log()</code> to stablise variation</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">window</span>(carnival_eps_ts,<span class="at">end=</span><span class="fu">c</span>(<span class="dv">2010</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> <span class="fu">log</span>() <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="fu">window</span>(carnival_eps_ts,<span class="at">end=</span><span class="fu">c</span>(<span class="dv">2010</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> <span class="fu">log</span>() <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="index_files/figure-revealjs/carnival2-1.png" width="960" class="r-stretch"></section>
 <section id="seasonally-differencing" class="slide level2">
 <h2>Seasonally differencing?</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">window</span>(carnival_eps_ts,<span class="at">end=</span><span class="fu">c</span>(<span class="dv">2010</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">log</span>() <span class="sc">%&gt;%</span> <span class="fu">diff</span>(<span class="at">lag=</span><span class="dv">4</span>) <span class="sc">%&gt;%</span>  <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">window</span>(carnival_eps_ts,<span class="at">end=</span><span class="fu">c</span>(<span class="dv">2010</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href=""></a>  <span class="fu">log</span>() <span class="sc">%&gt;%</span> <span class="fu">diff</span>(<span class="at">lag=</span><span class="dv">4</span>) <span class="sc">%&gt;%</span>  <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="index_files/figure-revealjs/carnival3-1.png" width="960" class="r-stretch"></section>
 <section id="is-this-now-stationary" class="slide level2 your-turn">
 <h2>Is this now stationary</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">window</span>(carnival_eps_ts,<span class="at">end=</span><span class="fu">c</span>(<span class="dv">2010</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> <span class="fu">log</span>() <span class="sc">%&gt;%</span> <span class="fu">diff</span>(<span class="at">lag=</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">diff</span>(<span class="at">lag=</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="fu">window</span>(carnival_eps_ts,<span class="at">end=</span><span class="fu">c</span>(<span class="dv">2010</span>,<span class="dv">1</span>)) <span class="sc">%&gt;%</span> <span class="fu">log</span>() <span class="sc">%&gt;%</span> <span class="fu">diff</span>(<span class="at">lag=</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">diff</span>(<span class="at">lag=</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="index_files/figure-revealjs/carnival4-1.png" width="960" class="r-stretch"></section>
@@ -601,10 +618,8 @@ Barry Quinn
 <li><p>But taking lag 3 differences for yearly data, for example, results in a model which cannot be sensibly interpreted.</p></li>
 </ul>
 </section>
-<section id="unit-root-tests" class="slide level2">
+<section id="unit-root-tests" class="slide level2 scrollable">
 <h2>Unit root tests</h2>
-<div class="columns">
-<div class="column">
 <blockquote>
 <p>Statistical tests to determine the required order of differencing</p>
 </blockquote>
@@ -613,12 +628,12 @@ Barry Quinn
 <li>Kwiatkowski-Phillips-Schmidt-Shin (KPSS) test: null hypothesis is that the data are stationary and non-seasonal.</li>
 <li>Other tests available for seasonal data.</li>
 </ol>
-</div><div class="column">
+</section>
 <section id="kpss-test" class="slide level2">
 <h2>KPSS test</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">library</span>(urca)</span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="fu">summary</span>(<span class="fu">ur.kpss</span>(ftse_m_ts))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="fu">library</span>(urca)</span>
+<span id="cb13-2"><a href=""></a><span class="fu">summary</span>(<span class="fu">ur.kpss</span>(ftse_m_ts))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 ####################### 
@@ -635,9 +650,6 @@ critical values 0.347 0.463  0.574 0.739</code></pre>
 </div>
 </div>
 </section>
-</div>
-</div>
-</section>
 <section id="automatically-selecting-differences" class="slide level2">
 <h2>Automatically selecting differences</h2>
 <ul>
@@ -645,11 +657,11 @@ critical values 0.347 0.463  0.574 0.739</code></pre>
 <li><p>If <span class="math inline">\(F_s &gt; 0.64\)</span>, do one seasonal difference.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>carnival_eps_ts <span class="sc">%&gt;%</span> <span class="fu">log</span>() <span class="sc">%&gt;%</span> <span class="fu">nsdiffs</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a>carnival_eps_ts <span class="sc">%&gt;%</span> <span class="fu">log</span>() <span class="sc">%&gt;%</span> <span class="fu">nsdiffs</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>carnival_eps_ts <span class="sc">%&gt;%</span> <span class="fu">log</span>() <span class="sc">%&gt;%</span> <span class="fu">diff</span>(<span class="at">lag=</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">ndiffs</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a>carnival_eps_ts <span class="sc">%&gt;%</span> <span class="fu">log</span>() <span class="sc">%&gt;%</span> <span class="fu">diff</span>(<span class="at">lag=</span><span class="dv">4</span>) <span class="sc">%&gt;%</span> <span class="fu">ndiffs</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
@@ -681,7 +693,6 @@ critical values 0.347 0.463  0.574 0.739</code></pre>
 </section>
 <section id="example-of-an-ar1-model" class="slide level2">
 <h2>Example of an AR(1) model</h2>
-<h3 id="simulating-an-ar1">Simulating an AR(1)</h3>
 <div class="columns">
 <div class="column">
 <ul>
@@ -689,14 +700,18 @@ critical values 0.347 0.463  0.574 0.739</code></pre>
 <li>where <span class="math inline">\(\varepsilon_t\sim N(0,1)\)</span> for <span class="math inline">\(T=100\)</span>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="fu">autoplot</span>(<span class="dv">10</span> <span class="sc">+</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">ar =</span> <span class="sc">-</span><span class="fl">0.8</span>), <span class="at">n =</span> <span class="dv">100</span>)) <span class="sc">+</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"AR(1)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb19-2"><a href=""></a><span class="fu">autoplot</span>(<span class="dv">10</span> <span class="sc">+</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">ar =</span> <span class="sc">-</span><span class="fl">0.8</span>), <span class="at">n =</span> <span class="dv">100</span>)) <span class="sc">+</span></span>
+<span id="cb19-3"><a href=""></a>  <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"AR(1)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column">
 <div class="cell">
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="index_files/figure-revealjs/arp1-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -704,48 +719,61 @@ critical values 0.347 0.463  0.574 0.739</code></pre>
 </section>
 <section id="simulating-an-ar2" class="slide level2">
 <h2>Simulating an AR(2)</h2>
-<p>::: columns ::: {.column}</p>
+<div class="columns">
+<div class="column small">
 <ul>
 <li><p>Simulating an <span class="math inline">\(y_t = 8 + 1.3y_{t-1} - 0.7 y_{t-2} + \varepsilon_t\)</span></p></li>
 <li><p>where <span class="math inline">\(\varepsilon_t\sim N(0,1)\)</span> for <span class="math inline">\(T=100\)</span>.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="fu">autoplot</span>(<span class="dv">20</span> <span class="sc">+</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">ar =</span> <span class="fu">c</span>(<span class="fl">1.3</span>, <span class="sc">-</span><span class="fl">0.7</span>)), <span class="at">n =</span> <span class="dv">100</span>)) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"AR(2)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb20-2"><a href=""></a><span class="fu">autoplot</span>(<span class="dv">20</span> <span class="sc">+</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">ar =</span> <span class="fu">c</span>(<span class="fl">1.3</span>, <span class="sc">-</span><span class="fl">0.7</span>)), <span class="at">n =</span> <span class="dv">100</span>)) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"AR(2)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>::: ::: {.column}</p>
-
-<img data-src="index_files/figure-revealjs/arp4-1.png" width="960" class="r-stretch"></section>
-<section id="ar1-models-explained" class="slide level2">
+</div><div class="column">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/arp4-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ar1-models-explained" class="slide level2 small">
 <h2>AR(1) models explained</h2>
-<p><span class="math display">\[y_{t}=c + \phi_1 y_{t -1}+\varepsilon_{t}\]</span> * When <span class="math inline">\(\phi_1=0\)</span>, <span class="math inline">\(y_t\)</span> is <strong>equivalent to White Noise</strong> * When <span class="math inline">\(\phi_1=1\)</span> and <span class="math inline">\(c=0\)</span>, <span class="math inline">\(y_t\)</span> is <strong>equivalent to a Random Walk</strong> * When <span class="math inline">\(\phi_1=1\)</span> and <span class="math inline">\(c\ne0\)</span>, <span class="math inline">\(y_t\)</span> is <strong>equivalent to a Random Walk with drift</strong> * When <span class="math inline">\(\phi_1&lt;0\)</span>, <span class="math inline">\(y_t\)</span> tends to <strong>oscillate between positive and negative values</strong>.</p>
+<p><span class="math display">\[y_{t}=c + \phi_1 y_{t -1}+\varepsilon_{t}\]</span> When <span class="math inline">\(\phi_1=0\)</span>, <span class="math inline">\(y_t\)</span> is <strong>equivalent to White Noise</strong></p>
+<p>When <span class="math inline">\(\phi_1=1\)</span> and <span class="math inline">\(c=0\)</span>, <span class="math inline">\(y_t\)</span> is <strong>equivalent to a Random Walk</strong></p>
+<p>When <span class="math inline">\(\phi_1=1\)</span> and <span class="math inline">\(c\ne0\)</span>, <span class="math inline">\(y_t\)</span> is <strong>equivalent to a Random Walk with drift</strong></p>
+<p>When <span class="math inline">\(\phi_1&lt;0\)</span>, <span class="math inline">\(y_t\)</span> tends to <strong>oscillate between positive and negative values</strong>.</p>
 </section>
 <section id="moving-average-ma-models" class="slide level2">
 <h2>Moving Average (MA) models</h2>
 <ul>
 <li>Moving Average (MA) models:</li>
 </ul>
-<p><span class="math display">\[y_{t} =c +\varepsilon_t + \theta_{1}\varepsilon_{t - 1} + \theta_{2}\varepsilon_{t - 2} +\cdots+\theta_{q}\varepsilon_{t - q},\]</span> - where <span class="math inline">\(\varepsilon_t\)</span> is white noise. - This is a multiple regression with <strong>past errors</strong> as predictors. <strong>Don’t confuse this with moving average smoothing!</strong></p>
+<p><span class="math display">\[y_{t} =c +\varepsilon_t + \theta_{1}\varepsilon_{t - 1} + \theta_{2}\varepsilon_{t - 2} +\cdots+\theta_{q}\varepsilon_{t - q},\]</span></p>
+<p>where <span class="math inline">\(\varepsilon_t\)</span> is white noise. - This is a multiple regression with <strong>past errors</strong> as predictors. <strong>Don’t confuse this with moving average smoothing!</strong></p>
 </section>
 <section id="simulated-ma-model" class="slide level2 small">
 <h2>Simulated MA model</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
-<span id="cb21-2"><a href="#cb21-2"></a>p1<span class="ot">&lt;-</span><span class="fu">autoplot</span>(<span class="dv">20</span> <span class="sc">+</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">ma =</span> <span class="fl">0.8</span>), <span class="at">n =</span> <span class="dv">100</span>)) <span class="sc">+</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="fu">TeX</span>(r<span class="st">'(MA(2) model: $y_t = 20 + </span><span class="sc">\e</span><span class="st">psilon_t + 0.8 </span><span class="sc">\e</span><span class="st">psilon_{t-1} ... </span><span class="sc">\e</span><span class="st">psilon_t \sim N(0,1)$)'</span>))</span>
-<span id="cb21-4"><a href="#cb21-4"></a>p2 <span class="ot">&lt;-</span> <span class="fu">autoplot</span>(<span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">ma =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="sc">+</span><span class="fl">0.8</span>)), <span class="at">n =</span> <span class="dv">100</span>)) <span class="sc">+</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a>  <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="fu">TeX</span>(r<span class="st">"(MA(2) model:  $y_t = </span><span class="sc">\e</span><span class="st">psilon_t -</span><span class="sc">\e</span><span class="st">psilon_{t-1} + 0.8 </span><span class="sc">\e</span><span class="st">psilon_{t-2} ... </span><span class="sc">\e</span><span class="st">psilon_t \sim N(0,1)$)"</span>))</span>
-<span id="cb21-6"><a href="#cb21-6"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(p1,p2,<span class="at">nrow=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
+<span id="cb21-2"><a href=""></a>p1<span class="ot">&lt;-</span><span class="fu">autoplot</span>(<span class="dv">20</span> <span class="sc">+</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">ma =</span> <span class="fl">0.8</span>), <span class="at">n =</span> <span class="dv">100</span>)) <span class="sc">+</span></span>
+<span id="cb21-3"><a href=""></a>  <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="fu">TeX</span>(r<span class="st">'(MA(2) model: $y_t = 20 + </span><span class="sc">\e</span><span class="st">psilon_t + 0.8 </span><span class="sc">\e</span><span class="st">psilon_{t-1} ... </span><span class="sc">\e</span><span class="st">psilon_t \sim N(0,1)$)'</span>))</span>
+<span id="cb21-4"><a href=""></a>p2 <span class="ot">&lt;-</span> <span class="fu">autoplot</span>(<span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">ma =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="sc">+</span><span class="fl">0.8</span>)), <span class="at">n =</span> <span class="dv">100</span>)) <span class="sc">+</span></span>
+<span id="cb21-5"><a href=""></a>  <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="fu">TeX</span>(r<span class="st">"(MA(2) model:  $y_t = </span><span class="sc">\e</span><span class="st">psilon_t -</span><span class="sc">\e</span><span class="st">psilon_{t-1} + 0.8 </span><span class="sc">\e</span><span class="st">psilon_{t-2} ... </span><span class="sc">\e</span><span class="st">psilon_t \sim N(0,1)$)"</span>))</span>
+<span id="cb21-6"><a href=""></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(p1,p2,<span class="at">nrow=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="index_files/figure-revealjs/maq-1.png" width="960" class="r-stretch"></section>
 <section id="arima-models" class="slide level2">
 <h2>ARIMA models</h2>
-<ul>
-<li>Autoregressive Integrated Moving Average models</li>
-</ul>
-<div class="discussion">
-<p>Autoregressive Moving Average models <span class="math display">\[
+<p>Autoregressive Integrated Moving Average models</p>
+<div class="fatinline">
+<p>Autoregressive <del>Integrated</del> Moving Average models (ARMA) <span class="math display">\[
 \begin{align*}
 y_{t} = c+ \phi_{1}y_{t - 1} +\cdots  +\phi_{p}y_{t-p} \\
 \theta_{1}\varepsilon_{t - 1} + \cdots +\theta_{q}\varepsilon_{t-q} +\varepsilon_{t}.
@@ -753,10 +781,10 @@ y_{t} = c+ \phi_{1}y_{t - 1} +\cdots  +\phi_{p}y_{t-p} \\
 \]</span></p>
 </div>
 </section>
-<section id="arima-models-1" class="slide level2">
+<section id="arima-models-1" class="slide level2 smaller">
 <h2>ARIMA models</h2>
 <ul>
-<li>Predictors include both <strong>lagged values of <span class="math inline">\(y_t\)</span> and lagged errors.</strong></li>
+<li>Predictors include both <strong>lagged values of</strong> <span class="math inline">\(y_t\)</span> and lagged errors.</li>
 <li>Conditions on coefficients ensure stationarity.</li>
 <li>Conditions on coefficients ensure invertibility.</li>
 <li>Combine ARMA model with <strong>differencing</strong>.</li>
@@ -764,17 +792,17 @@ y_{t} = c+ \phi_{1}y_{t - 1} +\cdots  +\phi_{p}y_{t-p} \\
 </section>
 <section id="arima-models-notation" class="slide level2">
 <h2>ARIMA models notation</h2>
-<div class="columns">
-<div class="column small">
 <ul>
-<li>Autoregressive Integrated Moving Average models</li>
 <li>ARIMA(p, d, q) model</li>
 <li>AR part: p = order of the autoregressive part</li>
 <li>I part: d = degree of first differencing involved</li>
 <li>MA part: q = order of the moving average part.</li>
 <li>ARIMA(1,1,1) model: <span class="math display">\[(y_t-y_{t-1}) =c + \phi_1 (y_{t-1}- y_{t-2}) +\theta_1\varepsilon_{t-1} + \varepsilon_t\]</span></li>
+<li>These componets are the integrated parts <span class="math inline">\((y_t-y_{t-1}) \dots (y_{t-1}- y_{t-2})\)</span></li>
 </ul>
-</div><div class="column small">
+</section>
+<section id="arima-models-notation-1" class="slide level2">
+<h2>ARIMA models notation</h2>
 <ul>
 <li>White noise model: ARIMA(0,0,0)</li>
 <li>Random walk: ARIMA(0,1,0) with no constant</li>
@@ -782,24 +810,22 @@ y_{t} = c+ \phi_{1}y_{t - 1} +\cdots  +\phi_{p}y_{t-p} \\
 <li>AR(p): ARIMA(p,0,0)</li>
 <li>MA(q): ARIMA(0,0,q)</li>
 </ul>
-</div>
-</div>
 </section>
 <section id="arima-modelling-of-us-consumption" class="slide level2">
 <h2>ARIMA modelling of US consumption</h2>
 <h3 id="the-data">The data</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">autoplot</span>(uschange[,<span class="st">"Consumption"</span>]) <span class="sc">+</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">xlab</span>(<span class="st">"Year"</span>) <span class="sc">+</span></span>
-<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">ylab</span>(<span class="st">"Quarterly percentage change"</span>) <span class="sc">+</span></span>
-<span id="cb22-4"><a href="#cb22-4"></a>  <span class="fu">ggtitle</span>(<span class="st">"US consumption"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a><span class="fu">autoplot</span>(uschange[,<span class="st">"Consumption"</span>]) <span class="sc">+</span></span>
+<span id="cb22-2"><a href=""></a>  <span class="fu">xlab</span>(<span class="st">"Year"</span>) <span class="sc">+</span></span>
+<span id="cb22-3"><a href=""></a>  <span class="fu">ylab</span>(<span class="st">"Quarterly percentage change"</span>) <span class="sc">+</span></span>
+<span id="cb22-4"><a href=""></a>  <span class="fu">ggtitle</span>(<span class="st">"US consumption"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="index_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
 <section id="fit-an-arima202" class="slide level2">
 <h2>fit an ARIMA(2,0,2)</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>((fit <span class="ot">&lt;-</span> <span class="fu">arima</span>(uschange[,<span class="st">"Consumption"</span>],<span class="at">order =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">2</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a>((fit <span class="ot">&lt;-</span> <span class="fu">arima</span>(uschange[,<span class="st">"Consumption"</span>],<span class="at">order =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">2</span>))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -814,14 +840,14 @@ sigma^2 estimated as 0.3417:  log likelihood = -165.14,  aic = 342.28</code></pr
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>coef <span class="ot">&lt;-</span> <span class="fu">coefficients</span>(fit)</span>
-<span id="cb25-2"><a href="#cb25-2"></a>ar1<span class="ot">=</span><span class="fu">round</span>(coef[<span class="st">'ar1'</span>],<span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">unname</span>()</span>
-<span id="cb25-3"><a href="#cb25-3"></a>ar2<span class="ot">=</span><span class="fu">round</span>(coef[<span class="st">'ar2'</span>],<span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">unname</span>()</span>
-<span id="cb25-4"><a href="#cb25-4"></a>intercept <span class="ot">=</span> <span class="fu">round</span>(coef[<span class="st">'intercept'</span>] <span class="sc">*</span> (<span class="dv">1</span><span class="sc">-</span>coef[<span class="st">'ar1'</span>] <span class="sc">-</span> coef[<span class="st">'ar2'</span>]),<span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">unname</span>()</span>
-<span id="cb25-5"><a href="#cb25-5"></a>ma1<span class="ot">=</span><span class="fu">round</span>(coef[<span class="st">'ma1'</span>],<span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">unname</span>()</span>
-<span id="cb25-6"><a href="#cb25-6"></a>ma2<span class="ot">=</span><span class="fu">round</span>(coef[<span class="st">'ma2'</span>],<span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">unname</span>()</span>
-<span id="cb25-7"><a href="#cb25-7"></a>sigma<span class="ot">=</span><span class="fu">round</span>(<span class="fu">sqrt</span>(fit<span class="sc">$</span>sigma2),<span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">unname</span>()</span>
-<span id="cb25-8"><a href="#cb25-8"></a>sigma2<span class="ot">=</span><span class="fu">round</span>(fit<span class="sc">$</span>sigma2,<span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">unname</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a>coef <span class="ot">&lt;-</span> <span class="fu">coefficients</span>(fit)</span>
+<span id="cb25-2"><a href=""></a>ar1<span class="ot">=</span><span class="fu">round</span>(coef[<span class="st">'ar1'</span>],<span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">unname</span>()</span>
+<span id="cb25-3"><a href=""></a>ar2<span class="ot">=</span><span class="fu">round</span>(coef[<span class="st">'ar2'</span>],<span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">unname</span>()</span>
+<span id="cb25-4"><a href=""></a>intercept <span class="ot">=</span> <span class="fu">round</span>(coef[<span class="st">'intercept'</span>] <span class="sc">*</span> (<span class="dv">1</span><span class="sc">-</span>coef[<span class="st">'ar1'</span>] <span class="sc">-</span> coef[<span class="st">'ar2'</span>]),<span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">unname</span>()</span>
+<span id="cb25-5"><a href=""></a>ma1<span class="ot">=</span><span class="fu">round</span>(coef[<span class="st">'ma1'</span>],<span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">unname</span>()</span>
+<span id="cb25-6"><a href=""></a>ma2<span class="ot">=</span><span class="fu">round</span>(coef[<span class="st">'ma2'</span>],<span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">unname</span>()</span>
+<span id="cb25-7"><a href=""></a>sigma<span class="ot">=</span><span class="fu">round</span>(<span class="fu">sqrt</span>(fit<span class="sc">$</span>sigma2),<span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">unname</span>()</span>
+<span id="cb25-8"><a href=""></a>sigma2<span class="ot">=</span><span class="fu">round</span>(fit<span class="sc">$</span>sigma2,<span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">unname</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="the-estimated-model" class="slide level2">
@@ -834,12 +860,49 @@ sigma^2 estimated as 0.3417:  log likelihood = -165.14,  aic = 342.28</code></pr
 </section>
 <section id="forecasts-from-estimated-model" class="slide level2">
 <h2>Forecasts from estimated model</h2>
+<h3 id="the-forecasted-data">The forecasted data</h3>
+<ul>
+<li>The data is point estimates based on some frequentist asymptotic theory</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>fit <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>(<span class="at">include=</span><span class="dv">80</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a>fit <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        Point Forecast        Lo 80    Hi 80      Lo 95    Hi 95
+2016 Q4      0.7502795  0.001108855 1.499450 -0.3954781 1.896037
+2017 Q1      0.7894265  0.023789630 1.555063 -0.3815141 1.960367
+2017 Q2      0.8039764  0.012001551 1.595951 -0.4072446 2.015197
+2017 Q3      0.8014580 -0.012967301 1.615883 -0.4440980 2.047014
+2017 Q4      0.7894979 -0.037980785 1.616976 -0.4760215 2.055017
+2018 Q1      0.7743270 -0.058387145 1.607041 -0.4991994 2.047853
+2018 Q2      0.7601787 -0.073727533 1.594085 -0.5151708 2.035528
+2018 Q3      0.7493189 -0.084623827 1.583262 -0.5260865 2.024724
+2018 Q4      0.7424386 -0.091640109 1.576517 -0.5331747 2.018052
+2019 Q1      0.7391815 -0.095286207 1.573649 -0.5370267 2.015390</code></pre>
+</div>
+</div>
+</section>
+<section id="forecasts-from-estimated-model-1" class="slide level2">
+<h2>Forecasts from estimated model</h2>
+<h3 id="plotting-the-forecasts">Plotting the forecasts</h3>
+<ul>
+<li>The points estimates are visualised as banded limits at the 80% and 95% forecasting levels</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a>fit <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">10</span>) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>(<span class="at">include=</span><span class="dv">80</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="index_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
-<section id="understanding-arima-models" class="slide level2">
+<img data-src="index_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
+<section id="section-2" class="slide level2 your-turn small">
+<h2></h2>
+<ul>
+<li>A. There is a 95% probability that the population mean falls within the calculated confidence interval.</li>
+<li>B. If we were to draw 100 different samples and compute a 95% confidence interval for each sample, we would expect about 95 of these intervals to contain the population mean.</li>
+<li>C. The population mean is 95% likely to be the center point of the calculated confidence interval.</li>
+<li>D. There is a 95% chance that any given sample mean falls within the calculated confidence interval.</li>
+<li>E. The calculated confidence interval captures the range within which 95% of the population data falls.</li>
+</ul>
+</section>
+<section id="understanding-arima-models" class="slide level2 small">
 <h2>Understanding ARIMA models</h2>
 <ul>
 <li>If <span class="math inline">\(c=0\)</span> and <span class="math inline">\(d=0\)</span>, the long-term forecasts will go to zero.</li>
@@ -857,6 +920,9 @@ sigma^2 estimated as 0.3417:  log likelihood = -165.14,  aic = 342.28</code></pr
 <li>The higher the value of <span class="math inline">\(d\)</span>, the more rapidly the prediction intervals increase in size.</li>
 <li>For <span class="math inline">\(d=0\)</span>, the long-term forecast standard deviation will go to the standard deviation of the historical data.</li>
 </ul>
+</section>
+<section id="understanding-arima-models-2" class="slide level2 smaller">
+<h2>Understanding ARIMA models</h2>
 <h3 id="cyclic-behaviour">Cyclic behaviour</h3>
 <ul>
 <li>For cyclic forecasts, <span class="math inline">\(p\ge2\)</span> and some restrictions on coefficients are required.</li>
@@ -867,13 +933,13 @@ sigma^2 estimated as 0.3417:  log likelihood = -165.14,  aic = 342.28</code></pr
 <li>This formula has important uses in estimation business and economic cycles. (See Example 2.3 in Tsay (2010))</li>
 </ul>
 </section>
-<section id="model-building" class="slide level2">
+<section id="model-building" class="slide level2 small">
 <h2>Model building</h2>
-<h3 id="maximum-likelihood-estimation">Maximum likelihood estimation</h3>
+<h3 id="maximum-likelihood-estimation-mle">Maximum likelihood estimation (MLE)</h3>
 <ul>
 <li><p>Having identified the model order, we need to estimate the parameters <span class="math inline">\(c,\phi_1,\dots,\phi_p \text{  }\theta_1,\dots,\theta_q\)</span>.</p></li>
 <li><p>MLE is very similar to least squares estimation obtained by minimizing <span class="math inline">\(\sum_{t-1}^T e_t^2\)</span></p></li>
-<li><p>The <code>Arima()</code> command allows CLS or MLE estimation.</p></li>
+<li><p>The <code>Arima()</code> command allows MLE estimation and constrained least squares(CLS).</p></li>
 <li><p>Non-linear optimization must be used in either case.</p></li>
 <li><p>Different software will give different estimates.</p></li>
 </ul>
@@ -896,9 +962,9 @@ sigma^2 estimated as 0.3417:  log likelihood = -165.14,  aic = 342.28</code></pr
 <section id="example-us-consumption" class="slide level2">
 <h2>Example: US consumption</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggAcf</span>(uschange[,<span class="st">"Consumption"</span>],<span class="at">main=</span><span class="st">""</span>)</span>
-<span id="cb27-2"><a href="#cb27-2"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggPacf</span>(uschange[,<span class="st">"Consumption"</span>],<span class="at">main=</span><span class="st">""</span>)</span>
-<span id="cb27-3"><a href="#cb27-3"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(p1,p2,<span class="at">nrow=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggAcf</span>(uschange[,<span class="st">"Consumption"</span>],<span class="at">main=</span><span class="st">""</span>)</span>
+<span id="cb29-2"><a href=""></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggPacf</span>(uschange[,<span class="st">"Consumption"</span>],<span class="at">main=</span><span class="st">""</span>)</span>
+<span id="cb29-3"><a href=""></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(p1,p2,<span class="at">nrow=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="index_files/figure-revealjs/usconsumptionacf-1.png" width="960" class="r-stretch"></section>
@@ -912,27 +978,35 @@ sigma^2 estimated as 0.3417:  log likelihood = -165.14,  aic = 342.28</code></pr
 <li>there is a single significant partial autocorrelation.</li>
 </ul>
 </section>
-<section id="acf-and-pacf-interpretation-1" class="slide level2">
+<section id="acf-and-pacf-interpretation-1" class="slide level2 small">
 <h2>ACF and PACF interpretation</h2>
-<p><strong>AR(p)</strong> * ACF dies out in an exponential or damped sine-wave manner * PACF has all zero spikes beyond the <span class="math inline">\(p\)</span>th spike</p>
+<ul>
+<li><strong>AR(p)</strong></li>
+<li>ACF dies out in an exponential or damped sine-wave manner</li>
+<li>PACF has all zero spikes beyond the <span class="math inline">\(p\)</span>th spike</li>
+</ul>
 <p>So we have an AR(p)) model when</p>
 <ul>
 <li>the ACF is exponentially decaying or sinusoidal</li>
 <li>there is a significant spike at lag <span class="math inline">\(p\)</span> in PACF, but none beyond <span class="math inline">\(p\)</span></li>
 </ul>
 </section>
-<section id="section-2" class="slide level2">
-<h2></h2>
-<p><strong>MA(1)</strong> <span class="math display">\[
+<section id="ma1-based-on-acf-and-pacf" class="slide level2">
+<h2><strong>MA(1)</strong> based on ACF and PACF</h2>
+<p><span class="math display">\[
 \begin{align*}
 \rho_1 &amp;= \theta_1 \qquad \rho_k = 0\qquad\text{for k=2,3,...};\\
 \alpha_k &amp;= -(-\theta_1)^k
 \end{align*}
-\]</span> So we have an MA(1) model when * the PACF is exponentially decaying and * there is a single significant spike in ACF</p>
+\]</span></p>
+<ul>
+<li><p>So we have an MA(1) model when</p></li>
+<li><p>the PACF is exponentially decaying</p></li>
+<li><p>and there is a single significant spike in ACF</p></li>
+</ul>
 </section>
-<section id="section-3" class="slide level2">
-<h2></h2>
-<p><strong>MA(q)</strong></p>
+<section id="more-generally-picking-q-for-maq" class="slide level2">
+<h2>More generally picking q for <strong>MA(q)</strong></h2>
 <ul>
 <li>PACF dies out in an exponential or damped sine-wave manner</li>
 <li>ACF has all zero spikes beyond the <span class="math inline">\(q\)</span>th spike</li>
@@ -951,6 +1025,9 @@ sigma^2 estimated as 0.3417:  log likelihood = -165.14,  aic = 342.28</code></pr
 <p><strong>Akaike’s Information Criterion (AIC):</strong></p>
 <p><span class="math inline">\(\text{AIC} = -2 \log(L) + 2(p+q+k+1),\)</span> where <span class="math inline">\(L\)</span> is the likelihood of the data, <span class="math inline">\(k=1\)</span> if <span class="math inline">\(c\ne0\)</span> and <span class="math inline">\(k=0\)</span> if <span class="math inline">\(c=0\)</span>]</p>
 <p><strong>Corrected AIC:</strong> <br> <span class="math inline">\(\text{AICc} = \text{AIC} + \frac{2(p+q+k+1)(p+q+k+2)}{T-p-q-k-2}.\)</span></p>
+</section>
+<section id="information-criteria-for-model-selection-1" class="slide level2 smaller">
+<h2>Information criteria for model selection</h2>
 <p><strong>Bayesian Information Criterion:</strong><br> <span class="math inline">\(\text{BIC} = \text{AIC} + [\log(T)-2](p+q+k-1).\)</span><br> Good models are obtained by minimizing either the AIC, AICc or BIC. My preference is to use the AICc.</p>
 </section>
 <section id="powerful-non-stationary-model-in-finance" class="slide level2">
@@ -964,29 +1041,27 @@ sigma^2 estimated as 0.3417:  log likelihood = -165.14,  aic = 342.28</code></pr
 <h2>Simulation 1</h2>
 <p><span class="math inline">\(y_t = 10 + 0.99y_{t-1}+ \varepsilon_t\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb28-2"><a href="#cb28-2"></a><span class="fu">autoplot</span>(<span class="dv">10</span> <span class="sc">+</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">ar =</span><span class="fl">0.99</span>), <span class="at">n =</span> <span class="dv">100</span>))  <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span> </span>
-<span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">ggtitle</span>(<span class="st">"Is this a random walk with drift?"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb30-2"><a href=""></a><span class="fu">autoplot</span>(<span class="dv">10</span> <span class="sc">+</span> <span class="fu">arima.sim</span>(<span class="fu">list</span>(<span class="at">ar =</span><span class="fl">0.99</span>), <span class="at">n =</span> <span class="dv">100</span>))  <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span> </span>
+<span id="cb30-3"><a href=""></a>  <span class="fu">ggtitle</span>(<span class="st">"Is this a random walk with drift?"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
 <section id="simulation-1-1" class="slide level2">
 <h2>Simulation 1</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
-<span id="cb29-2"><a href="#cb29-2"></a>S0<span class="ot">=</span><span class="dv">10</span></span>
-<span id="cb29-3"><a href="#cb29-3"></a>n<span class="ot">=</span><span class="dv">100</span></span>
-<span id="cb29-4"><a href="#cb29-4"></a>chgs<span class="ot">=</span><span class="fu">rnorm</span>(n<span class="dv">-1</span>,<span class="fl">1.001</span>,<span class="fl">0.01</span>)</span>
-<span id="cb29-5"><a href="#cb29-5"></a>rw<span class="ot">=</span><span class="fu">ts</span>(<span class="fu">cumprod</span>(<span class="fu">c</span>(S0,chgs)))</span>
-<span id="cb29-6"><a href="#cb29-6"></a><span class="fu">autoplot</span>(rw)  <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span> </span>
-<span id="cb29-7"><a href="#cb29-7"></a>  <span class="fu">ggtitle</span>(<span class="st">"Is this a random walk with drift?"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
+<span id="cb31-2"><a href=""></a>S0<span class="ot">=</span><span class="dv">10</span></span>
+<span id="cb31-3"><a href=""></a>n<span class="ot">=</span><span class="dv">100</span></span>
+<span id="cb31-4"><a href=""></a>chgs<span class="ot">=</span><span class="fu">rnorm</span>(n<span class="dv">-1</span>,<span class="fl">1.001</span>,<span class="fl">0.01</span>)</span>
+<span id="cb31-5"><a href=""></a>rw<span class="ot">=</span><span class="fu">ts</span>(<span class="fu">cumprod</span>(<span class="fu">c</span>(S0,chgs)))</span>
+<span id="cb31-6"><a href=""></a><span class="fu">autoplot</span>(rw)  <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span> </span>
+<span id="cb31-7"><a href=""></a>  <span class="fu">ggtitle</span>(<span class="st">"Is this a random walk with drift?"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>] .pull-right-wide[</p>
 
-<img data-src="index_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
-<section>
-<section id="a-rule-based-arima-algorithm" class="title-slide slide level1 center">
-<h1>A rule-based ARIMA algorithm</h1>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
+<section id="ai-automation-for-arima-models" class="slide level2">
+<h2>AI automation for ARIMA models</h2>
 <ul>
 <li><p><code>auto.arima()</code></p></li>
 <li><p>For a non-seasonal ARIMA process we first need to select appropriate orders: <span class="math inline">\(p,q,d\)</span></p></li>
@@ -996,7 +1071,7 @@ sigma^2 estimated as 0.3417:  log likelihood = -165.14,  aic = 342.28</code></pr
 <li><p>Use stepwise search to traverse model space.</p></li>
 </ul>
 </section>
-<section id="how-does-auto.arima-work" class="slide level2">
+<section id="how-does-auto.arima-work" class="slide level2 small">
 <h2>How does auto.arima() work?</h2>
 <p><span class="math display">\[\text{AICc} = -2 log(L) + 2(p+q+k+1)\left[1 +
 \frac{(p+q+k+2)}{T-p-q-k-2}\right].\]</span></p>
@@ -1004,9 +1079,9 @@ sigma^2 estimated as 0.3417:  log likelihood = -165.14,  aic = 342.28</code></pr
 <li><p>where <span class="math inline">\(L\)</span> is the maximised likelihood fitted to the differenced data,</p></li>
 <li><p><span class="math inline">\(k=1\)</span> if <span class="math inline">\(c\neq 0\)</span> and <span class="math inline">\(k=0\)</span> otherwise.</p></li>
 </ul>
-</section></section>
-<section id="algorithmic-rule-1" class="title-slide slide level1 center">
-<h1>Algorithmic rule 1:</h1>
+</section>
+<section id="algorithmic-rule-1" class="slide level2">
+<h2>Algorithmic rule 1:</h2>
 <ul>
 <li>Select current model (with smallest AICc) from:</li>
 <li>ARIMA<span class="math inline">\((2,d,2)\)</span></li>
@@ -1015,10 +1090,8 @@ sigma^2 estimated as 0.3417:  log likelihood = -165.14,  aic = 342.28</code></pr
 <li>ARIMA<span class="math inline">\((0,d,1)\)</span></li>
 </ul>
 </section>
-
-<section>
-<section id="algorithmic-rule-2" class="title-slide slide level1 center">
-<h1>Algorithmic rule 2:</h1>
+<section id="algorithmic-rule-2" class="slide level2">
+<h2>Algorithmic rule 2:</h2>
 <ul>
 <li><p>Consider variations of current model:</p></li>
 <li><p>vary one of <span class="math inline">\(p,q,\)</span> from current model by <span class="math inline">\(\pm1\)</span>;</p></li>
@@ -1040,15 +1113,19 @@ sigma^2 estimated as 0.3417:  log likelihood = -165.14,  aic = 342.28</code></pr
 <div class="columns">
 <div class="column">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>tidyquant<span class="sc">::</span><span class="fu">tq_get</span>(<span class="st">'^VIX'</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">select</span>(adjusted) <span class="sc">%&gt;%</span></span>
-<span id="cb30-3"><a href="#cb30-3"></a>  <span class="fu">ts</span>() <span class="ot">-&gt;</span> vix_ts</span>
-<span id="cb30-4"><a href="#cb30-4"></a><span class="fu">ggtsdisplay</span>(<span class="fu">log</span>(vix_ts))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a>tidyquant<span class="sc">::</span><span class="fu">tq_get</span>(<span class="st">'^VIX'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href=""></a>  <span class="fu">select</span>(adjusted) <span class="sc">%&gt;%</span></span>
+<span id="cb32-3"><a href=""></a>  <span class="fu">ts</span>() <span class="ot">-&gt;</span> vix_ts</span>
+<span id="cb32-4"><a href=""></a><span class="fu">ggtsdisplay</span>(<span class="fu">log</span>(vix_ts))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-19-1.png" width="960"></p>
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-20-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -1059,13 +1136,17 @@ sigma^2 estimated as 0.3417:  log likelihood = -165.14,  aic = 342.28</code></pr
 <div class="columns">
 <div class="column">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">ggtsdisplay</span>(<span class="fu">diff</span>(<span class="fu">log</span>(vix_ts)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="fu">ggtsdisplay</span>(<span class="fu">diff</span>(<span class="fu">log</span>(vix_ts)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">ggtsdisplay</span>(<span class="fu">diff</span>(<span class="fu">log</span>(vix_ts)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a><span class="fu">ggtsdisplay</span>(<span class="fu">diff</span>(<span class="fu">log</span>(vix_ts)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-21-1.png" width="960"></p>
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-22-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -1076,22 +1157,22 @@ sigma^2 estimated as 0.3417:  log likelihood = -165.14,  aic = 342.28</code></pr
 <div class="columns">
 <div class="column">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>(fit <span class="ot">&lt;-</span> <span class="fu">Arima</span>(<span class="fu">log</span>(vix_ts),<span class="at">order=</span><span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">1</span>,<span class="dv">0</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a>(fit <span class="ot">&lt;-</span> <span class="fu">Arima</span>(<span class="fu">log</span>(vix_ts),<span class="at">order=</span><span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">1</span>,<span class="dv">0</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>(fit <span class="ot">&lt;-</span> <span class="fu">Arima</span>(<span class="fu">log</span>(vix_ts),<span class="at">order=</span><span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">1</span>,<span class="dv">0</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a>(fit <span class="ot">&lt;-</span> <span class="fu">Arima</span>(<span class="fu">log</span>(vix_ts),<span class="at">order=</span><span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">1</span>,<span class="dv">0</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Series: log(vix_ts) 
 ARIMA(7,1,0) 
 
 Coefficients:
-          ar1      ar2     ar3      ar4      ar5      ar6      ar7
-      -0.0727  -0.0558  -0.012  -0.0583  -0.0090  -0.0527  -0.0438
-s.e.   0.0199   0.0200   0.020   0.0201   0.0201   0.0202   0.0204
+          ar1      ar2      ar3      ar4      ar5      ar6      ar7
+      -0.0727  -0.0564  -0.0126  -0.0586  -0.0088  -0.0523  -0.0438
+s.e.   0.0199   0.0199   0.0200   0.0200   0.0201   0.0202   0.0204
 
-sigma^2 = 0.006009:  log likelihood = 2866.92
-AIC=-5717.84   AICc=-5717.79   BIC=-5670.83</code></pre>
+sigma^2 = 0.006001:  log likelihood = 2878.42
+AIC=-5740.84   AICc=-5740.79   BIC=-5693.8</code></pre>
 </div>
 </div>
 </div>
@@ -1102,22 +1183,22 @@ AIC=-5717.84   AICc=-5717.79   BIC=-5670.83</code></pre>
 <div class="columns">
 <div class="column">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">auto.arima</span>(<span class="fu">log</span>(vix_ts))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a><span class="fu">auto.arima</span>(<span class="fu">log</span>(vix_ts))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">auto.arima</span>(<span class="fu">log</span>(vix_ts))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a><span class="fu">auto.arima</span>(<span class="fu">log</span>(vix_ts))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Series: log(vix_ts) 
 ARIMA(0,1,2) with drift 
 
 Coefficients:
           ma1      ma2   drift
-      -0.0709  -0.0524  0.0000
-s.e.   0.0199   0.0213  0.0013
+      -0.0708  -0.0533  0.0000
+s.e.   0.0199   0.0212  0.0013
 
-sigma^2 = 0.006042:  log likelihood = 2857.99
-AIC=-5707.99   AICc=-5707.97   BIC=-5684.48</code></pre>
+sigma^2 = 0.006034:  log likelihood = 2869.5
+AIC=-5731.01   AICc=-5730.99   BIC=-5707.49</code></pre>
 </div>
 </div>
 </div>
@@ -1125,109 +1206,72 @@ AIC=-5707.99   AICc=-5707.97   BIC=-5684.48</code></pre>
 </section>
 <section id="more-careful-algorthmic-choice" class="slide level2">
 <h2>More careful algorthmic choice</h2>
-<p>::: columns ::: {.column}</p>
+<div class="columns">
+<div class="column">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>(fit.auto<span class="ot">&lt;-</span><span class="fu">auto.arima</span>(<span class="fu">log</span>(vix_ts), </span>
-<span id="cb39-2"><a href="#cb39-2"></a>                      <span class="at">stepwise=</span><span class="cn">FALSE</span>,</span>
-<span id="cb39-3"><a href="#cb39-3"></a>                      <span class="at">approximation=</span><span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a>(fit.auto<span class="ot">&lt;-</span><span class="fu">auto.arima</span>(<span class="fu">log</span>(vix_ts), </span>
+<span id="cb41-2"><a href=""></a>                      <span class="at">stepwise=</span><span class="cn">FALSE</span>,</span>
+<span id="cb41-3"><a href=""></a>                      <span class="at">approximation=</span><span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>::: ::: {.column}</p>
+</div><div class="column">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>(fit.auto<span class="ot">&lt;-</span><span class="fu">auto.arima</span>(<span class="fu">log</span>(vix_ts), </span>
-<span id="cb40-2"><a href="#cb40-2"></a>                      <span class="at">stepwise=</span><span class="cn">FALSE</span>,</span>
-<span id="cb40-3"><a href="#cb40-3"></a>                      <span class="at">approximation=</span><span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a>(fit.auto<span class="ot">&lt;-</span><span class="fu">auto.arima</span>(<span class="fu">log</span>(vix_ts), </span>
+<span id="cb42-2"><a href=""></a>                      <span class="at">stepwise=</span><span class="cn">FALSE</span>,</span>
+<span id="cb42-3"><a href=""></a>                      <span class="at">approximation=</span><span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Series: log(vix_ts) 
 ARIMA(3,1,2) 
 
 Coefficients:
          ar1     ar2     ar3      ma1      ma2
-      0.1384  0.6992  0.0613  -0.2201  -0.7544
-s.e.  0.1256  0.1178  0.0205   0.1244   0.1216
+      0.1210  0.7182  0.0616  -0.2029  -0.7729
+s.e.  0.1217  0.1156  0.0206   0.1205   0.1180
 
-sigma^2 = 0.005959:  log likelihood = 2876.71
-AIC=-5741.42   AICc=-5741.38   BIC=-5706.16</code></pre>
+sigma^2 = 0.005951:  log likelihood = 2888.36
+AIC=-5764.71   AICc=-5764.68   BIC=-5729.43</code></pre>
 </div>
 </div>
-<p>:::</p>
+</div>
+</div>
 </section>
-<section id="section-4" class="slide level2">
+<section id="section-3" class="slide level2 discussion">
 <h2></h2>
-<div class="discussion">
 <ul>
 <li>Setting both <code>stepwise</code> and <code>approximation</code> arguments to <code>FALSE</code> will slow the automation down but provides a more exhaustive search for the appropriate model.</li>
 <li>The <code>auto.arima</code> function then searches over all possible models using MLE.</li>
 <li>See <code>help(auto.arima)</code> for more details.</li>
 </ul>
-</div>
 </section>
 <section id="human-vs-algo-residual-diagnostics" class="slide level2">
 <h2>Human Vs Algo: Residual Diagnostics</h2>
 <h3 id="human-choice-2">Human choice</h3>
-<div class="columns">
-<div class="column">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">checkresiduals</span>(fit, <span class="at">test=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a><span class="fu">checkresiduals</span>(fit, <span class="at">test=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 </div>
-</div><div class="column">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">checkresiduals</span>(fit, <span class="at">test=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-28-1.png" width="960"></p>
-</div>
-</div>
-</div>
-</div>
-</section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-28-1.png" width="960" class="r-stretch"></section>
 <section id="human-forecasting" class="slide level2">
 <h2>Human forecasting</h2>
-<div class="columns">
-<div class="column">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>fit <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">252</span>) <span class="sc">%&gt;%</span> autoplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a>fit <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">252</span>) <span class="sc">%&gt;%</span> autoplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 </div>
-</div><div class="column">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>fit <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">252</span>) <span class="sc">%&gt;%</span> autoplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-30-1.png" width="960"></p>
-</div>
-</div>
-</div>
-</div>
-</section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-29-1.png" width="960" class="r-stretch"></section>
 <section id="algorithm" class="slide level2">
 <h2>Algorithm</h2>
-<div class="columns">
-<div class="column">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">checkresiduals</span>(fit.auto,<span class="at">test =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a><span class="fu">checkresiduals</span>(fit.auto,<span class="at">test =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 </div>
-</div><div class="column">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">checkresiduals</span>(fit.auto,<span class="at">test =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-32-1.png" width="960"></p>
-</div>
-</div>
-</div>
-</div>
-</section>
+<img data-src="index_files/figure-revealjs/unnamed-chunk-30-1.png" width="960" class="r-stretch"></section>
 <section id="algo-forecasting" class="slide level2">
 <h2>Algo forecasting</h2>
-<div class="columns">
-<div class="column">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>fit.auto <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">252</span>) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a>fit.auto <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">252</span>) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 </div>
-</div><div class="column">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>fit.auto <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">252</span>) <span class="sc">%&gt;%</span> <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-34-1.png" width="960"></p>
-</div>
-</div>
-</div><section id="modelling-procedure-with-arima" class="slide level2 small">
+<img data-src="index_files/figure-revealjs/unnamed-chunk-31-1.png" width="960" class="r-stretch"></section>
+<section id="modelling-procedure-with-arima" class="slide level2 small scrollable">
 <h2>Modelling procedure with <code>Arima</code></h2>
 <h3 id="this-is-sometimes-referred-to-as-the-box-jenkins-approach">This is sometimes referred to as the Box-Jenkins approach</h3>
 <ol type="1">
@@ -1239,7 +1283,8 @@ AIC=-5741.42   AICc=-5741.38   BIC=-5706.16</code></pre>
 <li>Check the residuals from your chosen model by plotting the ACF of the residuals, and doing a portmanteau test of the residuals. If they do not look like white noise, try a modified model.</li>
 <li>Once the residuals look like white noise, calculate forecasts.</li>
 </ol>
-</section><section id="modelling-procedure-with-auto.arima" class="slide level2">
+</section>
+<section id="modelling-procedure-with-auto.arima" class="slide level2 scrollable">
 <h2>Modelling procedure with <code>auto.arima</code></h2>
 <ol type="1">
 <li><p>Plot the data. Identify any unusual observations.</p></li>
@@ -1248,24 +1293,26 @@ AIC=-5741.42   AICc=-5741.38   BIC=-5706.16</code></pre>
 <li><p>Check the residuals from your chosen model by plotting the ACF of the residuals, and doing a portmanteau test of the residuals. If they do not look like white noise, try a modified model.</p></li>
 <li><p>Once the residuals look like white noise, calculate forecasts.</p></li>
 </ol>
-</section><section id="project-based-example" class="title-slide slide level1 center">
-<h1>Project based example</h1>
-<div class="hand">
-<p>Russell 2000 index monthly returns</p>
-</div>
+</section>
+<section id="project-based-example" class="slide level2 small scrollable">
+<h2>Project based example</h2>
 <div class="columns">
 <div class="column">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a>tsfe<span class="sc">::</span>indices <span class="sc">%&gt;%</span></span>
-<span id="cb50-2"><a href="#cb50-2"></a>  <span class="fu">select</span>(date,<span class="st">`</span><span class="at">RUSSELL 2000 - PRICE INDEX</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb50-3"><a href="#cb50-3"></a>  <span class="fu">rename</span>(<span class="at">r2000=</span><span class="st">`</span><span class="at">RUSSELL 2000 - PRICE INDEX</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb50-4"><a href="#cb50-4"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb50-5"><a href="#cb50-5"></a>  <span class="fu">tq_transmute</span>(<span class="at">select =</span>r2000,<span class="at">mutate_fun =</span> periodReturn,<span class="at">type=</span><span class="st">'log'</span>) <span class="ot">-&gt;</span>monthly_r2002r</span>
-<span id="cb50-6"><a href="#cb50-6"></a>  <span class="fu">ts</span>(monthly_r2002r<span class="sc">$</span>monthly.returns, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1988</span>,<span class="dv">1</span>))<span class="ot">-&gt;</span>r2000r_m_ts</span>
-<span id="cb50-7"><a href="#cb50-7"></a><span class="fu">autoplot</span>(r2000r_m_ts) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Year"</span>) <span class="sc">+</span></span>
-<span id="cb50-8"><a href="#cb50-8"></a>  <span class="fu">ylab</span>(<span class="st">"monthly log returns"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a>tsfe<span class="sc">::</span>indices <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href=""></a>  <span class="fu">select</span>(date,<span class="st">`</span><span class="at">RUSSELL 2000 - PRICE INDEX</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb48-3"><a href=""></a>  <span class="fu">rename</span>(<span class="at">r2000=</span><span class="st">`</span><span class="at">RUSSELL 2000 - PRICE INDEX</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb48-4"><a href=""></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb48-5"><a href=""></a>  <span class="fu">tq_transmute</span>(<span class="at">select =</span>r2000,<span class="at">mutate_fun =</span> periodReturn,<span class="at">type=</span><span class="st">'log'</span>) <span class="ot">-&gt;</span>monthly_r2002r</span>
+<span id="cb48-6"><a href=""></a>  <span class="fu">ts</span>(monthly_r2002r<span class="sc">$</span>monthly.returns, <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1988</span>,<span class="dv">1</span>))<span class="ot">-&gt;</span>r2000r_m_ts</span>
+<span id="cb48-7"><a href=""></a><span class="fu">autoplot</span>(r2000r_m_ts) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Year"</span>) <span class="sc">+</span></span>
+<span id="cb48-8"><a href=""></a>  <span class="fu">ylab</span>(<span class="st">"monthly log returns"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img data-src="index_files/figure-revealjs/r2000r1-1.png" width="960"></p>
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-32-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div><div class="column">
@@ -1277,21 +1324,26 @@ AIC=-5741.42   AICc=-5741.38   BIC=-5706.16</code></pre>
 </div>
 </div>
 </section>
-<section id="project-based-example-1" class="title-slide slide level1 center">
-<h1>Project based example</h1>
-<p>::: columns :::{.column}</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">ggtsdisplay</span>(r2000r_m_ts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="index_files/figure-revealjs/r2000r2-1.png" width="960" class="r-stretch"></section>
-
-</div>
+<section id="project-based-example-1" class="slide level2 scrollable">
+<h2>Project based example</h2>
+<div class="columns">
 <div class="column">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href=""></a><span class="fu">ggtsdisplay</span>(r2000r_m_ts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/r2000r2-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column">
 <ol start="4" type="1">
 <li>PACF is suggestive of AR(5). So initial candidate model is ARIMA(5,0,0). No other obvious candidates.</li>
 <li>Fit ARIMA(5,0,0) model along with variations: ARIMA(4,0,0), ARIMA(3,0,0), ARIMA(4,0,1), etc. ARIMA(3,0,1) has smallest <em>AICc</em> value.</li>
 </ol>
+</div>
 </div>
 </section>
 <section id="project-based-example-2" class="slide level2">
@@ -1300,11 +1352,11 @@ AIC=-5741.42   AICc=-5741.38   BIC=-5706.16</code></pre>
 <div class="columns">
 <div class="column">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>(fit <span class="ot">&lt;-</span> <span class="fu">Arima</span>(r2000r_m_ts, <span class="at">order=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">0</span>,<span class="dv">1</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href=""></a>(fit <span class="ot">&lt;-</span> <span class="fu">Arima</span>(r2000r_m_ts, <span class="at">order=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">0</span>,<span class="dv">1</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>(fit <span class="ot">&lt;-</span> <span class="fu">Arima</span>(r2000r_m_ts, <span class="at">order=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">0</span>,<span class="dv">1</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href=""></a>(fit <span class="ot">&lt;-</span> <span class="fu">Arima</span>(r2000r_m_ts, <span class="at">order=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">0</span>,<span class="dv">1</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Series: r2000r_m_ts 
 ARIMA(3,0,1) with non-zero mean 
@@ -1321,13 +1373,13 @@ AIC=-1161.68   AICc=-1161.46   BIC=-1137.96</code></pre>
 </div>
 </div>
 </section>
-<section id="residual-check" class="slide level2">
+<section id="residual-check" class="slide level2 scrollable">
 <h2>Residual check</h2>
 <ol start="6" type="1">
 <li>ACF plot of residuals from ARIMA(3,0,1) model look like white noise.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">checkresiduals</span>(fit, <span class="at">plot=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href=""></a><span class="fu">checkresiduals</span>(fit, <span class="at">plot=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Ljung-Box test
@@ -1342,14 +1394,14 @@ Model df: 4.   Total lags used: 10</code></pre>
 <section id="forecasting" class="slide level2">
 <h2>Forecasting</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>fit <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">24</span>) <span class="sc">%&gt;%</span> autoplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href=""></a>fit <span class="sc">%&gt;%</span> <span class="fu">forecast</span>(<span class="at">h=</span><span class="dv">24</span>) <span class="sc">%&gt;%</span> autoplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="index_files/figure-revealjs/unnamed-chunk-36-1.png" width="960" class="r-stretch"></section>
-<section id="understanding-the-arima-output" class="slide level2">
+<img data-src="index_files/figure-revealjs/unnamed-chunk-34-1.png" width="960" class="r-stretch"></section>
+<section id="understanding-the-arima-output" class="slide level2 small">
 <h2>Understanding the ARIMA output</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a>(fit <span class="ot">&lt;-</span> <span class="fu">Arima</span>(r2000r_m_ts, <span class="at">order=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">0</span>,<span class="dv">1</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href=""></a>(fit <span class="ot">&lt;-</span> <span class="fu">Arima</span>(r2000r_m_ts, <span class="at">order=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">0</span>,<span class="dv">1</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Series: r2000r_m_ts 
 ARIMA(3,0,1) with non-zero mean 
@@ -1367,11 +1419,11 @@ AIC=-1161.68   AICc=-1161.46   BIC=-1137.96</code></pre>
 <section id="understanding-the-arima-output-1" class="slide level2 small">
 <h2>Understanding the ARIMA output</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a>a<span class="ot">=</span><span class="fu">unname</span>(<span class="fu">round</span>(fit<span class="sc">$</span>coef[<span class="st">"intercept"</span>],<span class="dv">3</span>))</span>
-<span id="cb60-2"><a href="#cb60-2"></a>ar1<span class="ot">=</span><span class="fu">unname</span>(<span class="fu">round</span>(fit<span class="sc">$</span>coef[<span class="st">"ar1"</span>],<span class="dv">3</span>))</span>
-<span id="cb60-3"><a href="#cb60-3"></a>ar2<span class="ot">=</span><span class="fu">unname</span>(<span class="fu">round</span>(fit<span class="sc">$</span>coef[<span class="st">"ar2"</span>],<span class="dv">3</span>))</span>
-<span id="cb60-4"><a href="#cb60-4"></a>ar3<span class="ot">=</span><span class="fu">unname</span>(<span class="fu">round</span>(fit<span class="sc">$</span>coef[<span class="st">"ar3"</span>],<span class="dv">3</span>))</span>
-<span id="cb60-5"><a href="#cb60-5"></a>ma1<span class="ot">=</span><span class="fu">unname</span>(<span class="fu">round</span>(fit<span class="sc">$</span>coef[<span class="st">"ma1"</span>],<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href=""></a>a<span class="ot">=</span><span class="fu">unname</span>(<span class="fu">round</span>(fit<span class="sc">$</span>coef[<span class="st">"intercept"</span>],<span class="dv">3</span>))</span>
+<span id="cb58-2"><a href=""></a>ar1<span class="ot">=</span><span class="fu">unname</span>(<span class="fu">round</span>(fit<span class="sc">$</span>coef[<span class="st">"ar1"</span>],<span class="dv">3</span>))</span>
+<span id="cb58-3"><a href=""></a>ar2<span class="ot">=</span><span class="fu">unname</span>(<span class="fu">round</span>(fit<span class="sc">$</span>coef[<span class="st">"ar2"</span>],<span class="dv">3</span>))</span>
+<span id="cb58-4"><a href=""></a>ar3<span class="ot">=</span><span class="fu">unname</span>(<span class="fu">round</span>(fit<span class="sc">$</span>coef[<span class="st">"ar3"</span>],<span class="dv">3</span>))</span>
+<span id="cb58-5"><a href=""></a>ma1<span class="ot">=</span><span class="fu">unname</span>(<span class="fu">round</span>(fit<span class="sc">$</span>coef[<span class="st">"ma1"</span>],<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>The fitted model is:</li>
@@ -1385,7 +1437,7 @@ AIC=-1161.68   AICc=-1161.46   BIC=-1137.96</code></pre>
 <li><p>Using the multi-period return definition from the financial data lecture an annualised log return is simple <span class="math inline">\(\sum_1^{12} y_t\)</span> <span class="math inline">\(\approx 1.44\)</span> per annum.</p></li>
 </ul>
 </section>
-<section id="frequentist-prediction-intervals" class="slide level2">
+<section id="frequentist-prediction-intervals" class="slide level2 small">
 <h2>Frequentist prediction intervals</h2>
 <p><span class="math display">\[\hat{y}_{T+h|T} \pm 1.96\sqrt{v_{T+h|T}}\]</span> where <span class="math inline">\(v_{T+h|T}\)</span> is estimated forecast variance.</p>
 <ul>
@@ -1399,7 +1451,7 @@ AIC=-1161.68   AICc=-1161.46   BIC=-1137.96</code></pre>
 <li>Other models beyond scope of this subject.</li>
 </ul>
 </section>
-<section id="prediction-intervals" class="slide level2">
+<section id="prediction-intervals" class="slide level2 small">
 <h2>Prediction intervals</h2>
 <ul>
 <li>Prediction intervals <strong>increase in size with forecast horizon</strong>.</li>
@@ -1412,11 +1464,13 @@ AIC=-1161.68   AICc=-1161.46   BIC=-1137.96</code></pre>
 <li>the ARIMA model assumes uncorrelated future <span class="math inline">\(errors\)</span></li>
 </ul></li>
 </ul>
-
-<img src="img/qbslogo.png" class="slide-logo r-stretch"><div class="footer footer-default">
+<div class="quarto-auto-generated-content">
+<p><img src="img/qbslogo.png" class="slide-logo"></p>
+<div class="footer footer-default">
 <p>Advanced Financial Data Analytics</p>
 </div>
-</section></section>
+</div>
+</section>
     </div>
   </div>
 
@@ -1443,7 +1497,6 @@ AIC=-1161.68   AICc=-1161.46   BIC=-1137.96</code></pre>
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -1742,10 +1795,9 @@ AIC=-1161.68   AICc=-1161.46   BIC=-1137.96</code></pre>
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn) {
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1755,8 +1807,17 @@ AIC=-1161.68   AICc=-1161.46   BIC=-1137.96</code></pre>
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
